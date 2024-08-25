@@ -1,6 +1,6 @@
-# Copyright (C) 2015, Wazuh Inc.
+# Copyright (C) 2015, Cyb3rhq Inc.
 # Paramas file
-class wazuh::params_manager {
+class cyb3rhq::params_manager {
   case $::kernel {
     'Linux': {
 
@@ -15,9 +15,9 @@ class wazuh::params_manager {
       $ossec_logall                                    = 'no'
       $ossec_logall_json                               = 'no'
       $ossec_emailnotification                         = false
-      $ossec_emailto                                   = ['recipient@example.wazuh.com']
-      $ossec_smtp_server                               = 'smtp.example.wazuh.com'
-      $ossec_emailfrom                                 = 'ossecm@example.wazuh.com'
+      $ossec_emailto                                   = ['recipient@example.cyb3rhq.com']
+      $ossec_smtp_server                               = 'smtp.example.cyb3rhq.com'
+      $ossec_emailfrom                                 = 'ossecm@example.cyb3rhq.com'
       $ossec_email_maxperhour                          = 12
       $ossec_email_idsname                             = undef
       $ossec_email_log_source                          = 'alerts.log'
@@ -52,24 +52,24 @@ class wazuh::params_manager {
 
 
     # ossec.conf templates paths
-      $ossec_manager_template                          = 'wazuh/wazuh_manager.conf.erb'
-      $ossec_rootcheck_template                        = 'wazuh/fragments/_rootcheck.erb'
-      $ossec_wodle_openscap_template                   = 'wazuh/fragments/_wodle_openscap.erb'
-      $ossec_wodle_cis_cat_template                    = 'wazuh/fragments/_wodle_cis_cat.erb'
-      $ossec_wodle_osquery_template                    = 'wazuh/fragments/_wodle_osquery.erb'
-      $ossec_wodle_syscollector_template               = 'wazuh/fragments/_wodle_syscollector.erb'
-      $ossec_wodle_docker_listener_template            = 'wazuh/fragments/_wodle_docker_listener.erb'
-      $ossec_vulnerability_detection_template          = 'wazuh/fragments/_vulnerability_detection.erb'
-      $ossec_vulnerability_indexer_template            = 'wazuh/fragments/_vulnerability_indexer.erb'
-      $ossec_sca_template                              = 'wazuh/fragments/_sca.erb'
-      $ossec_syscheck_template                         = 'wazuh/fragments/_syscheck.erb'
-      $ossec_default_commands_template                 = 'wazuh/default_commands.erb'
-      $ossec_localfile_template                        = 'wazuh/fragments/_localfile.erb'
-      $ossec_ruleset_template                          = 'wazuh/fragments/_ruleset.erb'
-      $ossec_auth_template                             = 'wazuh/fragments/_auth.erb'
-      $ossec_cluster_template                          = 'wazuh/fragments/_cluster.erb'
-      $ossec_active_response_template                  = 'wazuh/fragments/_default_activeresponse.erb'
-      $ossec_syslog_output_template                    = 'wazuh/fragments/_syslog_output.erb'
+      $ossec_manager_template                          = 'cyb3rhq/cyb3rhq_manager.conf.erb'
+      $ossec_rootcheck_template                        = 'cyb3rhq/fragments/_rootcheck.erb'
+      $ossec_wodle_openscap_template                   = 'cyb3rhq/fragments/_wodle_openscap.erb'
+      $ossec_wodle_cis_cat_template                    = 'cyb3rhq/fragments/_wodle_cis_cat.erb'
+      $ossec_wodle_osquery_template                    = 'cyb3rhq/fragments/_wodle_osquery.erb'
+      $ossec_wodle_syscollector_template               = 'cyb3rhq/fragments/_wodle_syscollector.erb'
+      $ossec_wodle_docker_listener_template            = 'cyb3rhq/fragments/_wodle_docker_listener.erb'
+      $ossec_vulnerability_detection_template          = 'cyb3rhq/fragments/_vulnerability_detection.erb'
+      $ossec_vulnerability_indexer_template            = 'cyb3rhq/fragments/_vulnerability_indexer.erb'
+      $ossec_sca_template                              = 'cyb3rhq/fragments/_sca.erb'
+      $ossec_syscheck_template                         = 'cyb3rhq/fragments/_syscheck.erb'
+      $ossec_default_commands_template                 = 'cyb3rhq/default_commands.erb'
+      $ossec_localfile_template                        = 'cyb3rhq/fragments/_localfile.erb'
+      $ossec_ruleset_template                          = 'cyb3rhq/fragments/_ruleset.erb'
+      $ossec_auth_template                             = 'cyb3rhq/fragments/_auth.erb'
+      $ossec_cluster_template                          = 'cyb3rhq/fragments/_cluster.erb'
+      $ossec_active_response_template                  = 'cyb3rhq/fragments/_default_activeresponse.erb'
+      $ossec_syslog_output_template                    = 'cyb3rhq/fragments/_syslog_output.erb'
 
       ## Rootcheck
 
@@ -254,7 +254,7 @@ class wazuh::params_manager {
 
       # Cluster
 
-      $ossec_cluster_name                              = 'wazuh'
+      $ossec_cluster_name                              = 'cyb3rhq'
       $ossec_cluster_node_name                         = 'node01'
       $ossec_cluster_node_type                         = 'master'
       $ossec_cluster_key                               = 'KEY'
@@ -277,30 +277,30 @@ class wazuh::params_manager {
       $agent_auth_password                 = undef
       $ar_repeated_offenders               = ''
 
-      $local_decoder_template              = 'wazuh/local_decoder.xml.erb'
+      $local_decoder_template              = 'cyb3rhq/local_decoder.xml.erb'
       $decoder_exclude                     = []
-      $local_rules_template                = 'wazuh/local_rules.xml.erb'
+      $local_rules_template                = 'cyb3rhq/local_rules.xml.erb'
       $rule_exclude                        = []
-      $shared_agent_template               = 'wazuh/ossec_shared_agent.conf.erb'
+      $shared_agent_template               = 'cyb3rhq/ossec_shared_agent.conf.erb'
 
-      $wazuh_manager_verify_manager_ssl    = false
-      $wazuh_manager_server_crt            = undef
-      $wazuh_manager_server_key            = undef
+      $cyb3rhq_manager_verify_manager_ssl    = false
+      $cyb3rhq_manager_server_crt            = undef
+      $cyb3rhq_manager_server_key            = undef
 
 
-      ## Wazuh config folders and modes
+      ## Cyb3rhq config folders and modes
 
       $config_file = '/var/ossec/etc/ossec.conf'
       $shared_agent_config_file = '/var/ossec/etc/shared/default/agent.conf'
 
       $config_mode = '0640'
       $config_owner = 'root'
-      $config_group = 'wazuh'
+      $config_group = 'cyb3rhq'
 
       $keys_file = '/var/ossec/etc/client.keys'
       $keys_mode = '0640'
       $keys_owner = 'root'
-      $keys_group = 'wazuh'
+      $keys_group = 'cyb3rhq'
 
 
       $authd_pass_file = '/var/ossec/etc/authd.pass'
@@ -310,51 +310,51 @@ class wazuh::params_manager {
       $processlist_file = '/var/ossec/bin/.process_list'
       $processlist_mode = '0640'
       $processlist_owner = 'root'
-      $processlist_group = 'wazuh'
+      $processlist_group = 'cyb3rhq'
 
       #API
 
-      $wazuh_api_host = '0.0.0.0'
-      $wazuh_api_port = '55000'
+      $cyb3rhq_api_host = '0.0.0.0'
+      $cyb3rhq_api_port = '55000'
 
-      $wazuh_api_file =  undef
+      $cyb3rhq_api_file =  undef
 
       # Advanced configuration
-      $wazuh_api_https_enabled = 'yes'
-      $wazuh_api_https_key = 'server.key'
-      $wazuh_api_https_cert = 'server.crt'
-      $wazuh_api_https_use_ca = 'False'
-      $wazuh_api_https_ca = 'ca.crt'
-      $wazuh_api_ssl_protocol = 'TLSv1.2'
-      $wazuh_api_ssl_ciphers  = '""'
+      $cyb3rhq_api_https_enabled = 'yes'
+      $cyb3rhq_api_https_key = 'server.key'
+      $cyb3rhq_api_https_cert = 'server.crt'
+      $cyb3rhq_api_https_use_ca = 'False'
+      $cyb3rhq_api_https_ca = 'ca.crt'
+      $cyb3rhq_api_ssl_protocol = 'TLSv1.2'
+      $cyb3rhq_api_ssl_ciphers  = '""'
 
       # Logging configuration
       # Values for API log level: disabled, info, warning, error, debug, debug2 (each level includes the previous level).
-      $wazuh_api_logs_level = 'info'
+      $cyb3rhq_api_logs_level = 'info'
       # Values for API log format: 'plain', 'json', 'plain,json', 'json,plain'
-      $wazuh_api_logs_format = 'plain'
+      $cyb3rhq_api_logs_format = 'plain'
 
       # Cross-origin resource sharing: https://github.com/aio-libs/aiohttp-cors#usage
-      $wazuh_api_cors_enabled = 'no'
-      $wazuh_api_cors_source_route = '"*"'
-      $wazuh_api_cors_expose_headers = '"*"'
-      $wazuh_api_cors_allow_headers = '"*"'
-      $wazuh_api_cors_allow_credentials = 'no'
+      $cyb3rhq_api_cors_enabled = 'no'
+      $cyb3rhq_api_cors_source_route = '"*"'
+      $cyb3rhq_api_cors_expose_headers = '"*"'
+      $cyb3rhq_api_cors_allow_headers = '"*"'
+      $cyb3rhq_api_cors_allow_credentials = 'no'
 
       # Cache (time in seconds)
-      $wazuh_api_cache_enabled = 'yes'
-      $wazuh_api_cache_time = '0.750'
+      $cyb3rhq_api_cache_enabled = 'yes'
+      $cyb3rhq_api_cache_time = '0.750'
 
       # Access parameters
-      $wazuh_api_access_max_login_attempts = 5
-      $wazuh_api_access_block_time = 300
-      $wazuh_api_access_max_request_per_minute = 300
+      $cyb3rhq_api_access_max_login_attempts = 5
+      $cyb3rhq_api_access_block_time = 300
+      $cyb3rhq_api_access_max_request_per_minute = 300
 
       # Drop privileges (Run as ossec user)
-      $wazuh_api_drop_privileges = 'yes'
+      $cyb3rhq_api_drop_privileges = 'yes'
 
       # Enable features under development
-      $wazuh_api_experimental_features = 'no'
+      $cyb3rhq_api_experimental_features = 'no'
 
       # Enable remote commands
       $remote_commands_localfile = 'yes'
@@ -363,15 +363,15 @@ class wazuh::params_manager {
       $remote_commands_wodle_exceptions = []
       $limits_eps = 'yes'
 
-      # Wazuh API template path
-      $wazuh_api_template = 'wazuh/wazuh_api_yml.erb'
+      # Cyb3rhq API template path
+      $cyb3rhq_api_template = 'cyb3rhq/cyb3rhq_api_yml.erb'
 
 
       case $::osfamily {
         'Debian': {
 
-          $agent_service  = 'wazuh-agent'
-          $agent_package  = 'wazuh-agent'
+          $agent_service  = 'cyb3rhq-agent'
+          $agent_package  = 'cyb3rhq-agent'
           $service_has_status  = false
           $ossec_service_provider = undef
           $api_service_provider = undef
@@ -384,8 +384,8 @@ class wazuh::params_manager {
           ]
           case $::lsbdistcodename {
             'xenial': {
-              $server_service = 'wazuh-manager'
-              $server_package = 'wazuh-manager'
+              $server_service = 'cyb3rhq-manager'
+              $server_package = 'cyb3rhq-manager'
               $wodle_openscap_content = {
                 'ssg-ubuntu-1604-ds.xml' => {
                   'type' => 'xccdf',
@@ -396,8 +396,8 @@ class wazuh::params_manager {
               }
             }
             'jessie': {
-              $server_service = 'wazuh-manager'
-              $server_package = 'wazuh-manager'
+              $server_service = 'cyb3rhq-manager'
+              $server_package = 'cyb3rhq-manager'
               $wodle_openscap_content = {
                 'ssg-debian-8-ds.xml' => {
                   'type' => 'xccdf',
@@ -409,8 +409,8 @@ class wazuh::params_manager {
               }
             }
             /^(wheezy|stretch|buster|bullseye|bookworm|sid|precise|trusty|vivid|wily|xenial|bionic|focal|groovy|jammy)$/: {
-              $server_service = 'wazuh-manager'
-              $server_package = 'wazuh-manager'
+              $server_service = 'cyb3rhq-manager'
+              $server_package = 'cyb3rhq-manager'
               $wodle_openscap_content = undef
             }
         default: {
@@ -421,10 +421,10 @@ class wazuh::params_manager {
         }
         'RedHat': {
 
-          $agent_service  = 'wazuh-agent'
-          $agent_package  = 'wazuh-agent'
-          $server_service = 'wazuh-manager'
-          $server_package = 'wazuh-manager'
+          $agent_service  = 'cyb3rhq-agent'
+          $agent_package  = 'cyb3rhq-agent'
+          $server_service = 'cyb3rhq-manager'
+          $server_package = 'cyb3rhq-manager'
           $service_has_status  = true
 
           $default_local_files =[
@@ -517,10 +517,10 @@ class wazuh::params_manager {
         }
         'Suse': {
 
-          $agent_service  = 'wazuh-agent'
-          $agent_package  = 'wazuh-agent'
-          $server_service = 'wazuh-manager'
-          $server_package = 'wazuh-manager'
+          $agent_service  = 'cyb3rhq-agent'
+          $agent_package  = 'cyb3rhq-agent'
+          $server_service = 'cyb3rhq-manager'
+          $server_package = 'cyb3rhq-manager'
           $service_has_status  = true
 
           $default_local_files =[
@@ -556,8 +556,8 @@ class wazuh::params_manager {
       $keys_owner = 'Administrator'
       $keys_group = 'Administrators'
 
-      $agent_service  = 'WazuhSvc'
-      $agent_package  = 'Wazuh Agent 5.0.0'
+      $agent_service  = 'Cyb3rhqSvc'
+      $agent_package  = 'Cyb3rhq Agent 5.0.0'
       $server_service = ''
       $server_package = ''
       $api_service = ''

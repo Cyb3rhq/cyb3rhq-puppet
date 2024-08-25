@@ -1,17 +1,17 @@
-# Wazuh Open Source Project Security Policy
+# Cyb3rhq Open Source Project Security Policy
 
 Version: 2023-06-12
 
 ## Introduction
-This document outlines the Security Policy for Wazuh's open source projects. It emphasizes our commitment to maintain a secure environment for our users and contributors, and reflects our belief in the power of collaboration to identify and resolve security vulnerabilities.
+This document outlines the Security Policy for Cyb3rhq's open source projects. It emphasizes our commitment to maintain a secure environment for our users and contributors, and reflects our belief in the power of collaboration to identify and resolve security vulnerabilities.
 
 ## Scope
-This policy applies to all open source projects developed, maintained, or hosted by Wazuh.
+This policy applies to all open source projects developed, maintained, or hosted by Cyb3rhq.
 
 ## Reporting Security Vulnerabilities
 If you believe you've discovered a potential security vulnerability in one of our open source projects, we strongly encourage you to report it to us responsibly.
 
-Please submit your findings as security advisories under the "Security" tab in the relevant GitHub repository. Alternatively, you may send the details of your findings to [security@wazuh.com](mailto:security@wazuh.com).
+Please submit your findings as security advisories under the "Security" tab in the relevant GitHub repository. Alternatively, you may send the details of your findings to [security@cyb3rhq.com](mailto:security@cyb3rhq.com).
 
 ## Vulnerability Disclosure Policy
 Upon receiving a report of a potential vulnerability, our team will initiate an investigation. If the reported issue is confirmed as a vulnerability, we will take the following steps:
@@ -20,7 +20,7 @@ Upon receiving a report of a potential vulnerability, our team will initiate an 
 - Validation: We will validate the issue and work on reproducing it in our environment.
 - Remediation: We will work on a fix and thoroughly test it
 - Release & Disclosure: After 90 days from the discovery of the vulnerability, or as soon as a fix is ready and thoroughly tested (whichever comes first), we will release a security update for the affected project. We will also publicly disclose the vulnerability by publishing a CVE (Common Vulnerabilities and Exposures) and acknowledging the discovering party.
-- Exceptions: In order to preserve the security of the Wazuh community at large, we might extend the disclosure period to allow users to patch their deployments.
+- Exceptions: In order to preserve the security of the Cyb3rhq community at large, we might extend the disclosure period to allow users to patch their deployments.
 
 This 90-day period allows for end-users to update their systems and minimizes the risk of widespread exploitation of the vulnerability.
 
@@ -42,4 +42,4 @@ We ask that all users and contributors respect this policy and the security of o
 ## Changes to this Security Policy
 This policy may be revised from time to time. Each version of the policy will be identified at the top of the page by its effective date.
 
-If you have any questions about this Security Policy, please contact us at [security@wazuh.com](mailto:security@wazuh.com).
+If you have any questions about this Security Policy, please contact us at [security@cyb3rhq.com](mailto:security@cyb3rhq.com).

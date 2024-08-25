@@ -1,6 +1,6 @@
-# Copyright (C) 2015, Wazuh Inc.
-# Wazuh-Agent configuration parameters
-class wazuh::params_agent {
+# Copyright (C) 2015, Cyb3rhq Inc.
+# Cyb3rhq-Agent configuration parameters
+class cyb3rhq::params_agent {
   $agent_package_version = '5.0.0'
   $agent_package_revision = '1'
   $agent_service_ensure = 'running'
@@ -17,13 +17,13 @@ class wazuh::params_agent {
   $logging_log_format = 'plain'
 
   # Agents registration parameters
-  $wazuh_agent_cert = undef
-  $wazuh_agent_key = undef
-  $wazuh_agent_cert_path = undef
-  $wazuh_agent_key_path = undef
+  $cyb3rhq_agent_cert = undef
+  $cyb3rhq_agent_key = undef
+  $cyb3rhq_agent_cert_path = undef
+  $cyb3rhq_agent_key_path = undef
   $agent_auth_password = undef
-  $wazuh_manager_root_ca_pem = undef
-  $wazuh_manager_root_ca_pem_path = undef
+  $cyb3rhq_manager_root_ca_pem = undef
+  $cyb3rhq_manager_root_ca_pem_path = undef
   $authd_pass_file = '/var/ossec/etc/authd.pass'
 
   # ossec.conf generation variables
@@ -39,29 +39,29 @@ class wazuh::params_agent {
   $configure_active_response = true
 
   # ossec.conf templates paths
-  $ossec_conf_template = 'wazuh/wazuh_agent.conf.erb'
-  $ossec_rootcheck_template = 'wazuh/fragments/_rootcheck.erb'
-  $ossec_wodle_openscap_template = 'wazuh/fragments/_wodle_openscap.erb'
-  $ossec_wodle_cis_cat_template = 'wazuh/fragments/_wodle_cis_cat.erb'
-  $ossec_wodle_osquery_template = 'wazuh/fragments/_wodle_osquery.erb'
-  $ossec_wodle_syscollector_template = 'wazuh/fragments/_wodle_syscollector.erb'
-  $ossec_wodle_docker_listener_template = 'wazuh/fragments/_wodle_docker_listener.erb'
-  $ossec_sca_template = 'wazuh/fragments/_sca.erb'
-  $ossec_syscheck_template = 'wazuh/fragments/_syscheck.erb'
-  $ossec_localfile_template = 'wazuh/fragments/_localfile.erb'
-  $ossec_auth = 'wazuh/fragments/_auth.erb'
-  $ossec_cluster = 'wazuh/fragments/_cluster.erb'
-  $ossec_active_response_template = 'wazuh/fragments/_activeresponse.erb'
+  $ossec_conf_template = 'cyb3rhq/cyb3rhq_agent.conf.erb'
+  $ossec_rootcheck_template = 'cyb3rhq/fragments/_rootcheck.erb'
+  $ossec_wodle_openscap_template = 'cyb3rhq/fragments/_wodle_openscap.erb'
+  $ossec_wodle_cis_cat_template = 'cyb3rhq/fragments/_wodle_cis_cat.erb'
+  $ossec_wodle_osquery_template = 'cyb3rhq/fragments/_wodle_osquery.erb'
+  $ossec_wodle_syscollector_template = 'cyb3rhq/fragments/_wodle_syscollector.erb'
+  $ossec_wodle_docker_listener_template = 'cyb3rhq/fragments/_wodle_docker_listener.erb'
+  $ossec_sca_template = 'cyb3rhq/fragments/_sca.erb'
+  $ossec_syscheck_template = 'cyb3rhq/fragments/_syscheck.erb'
+  $ossec_localfile_template = 'cyb3rhq/fragments/_localfile.erb'
+  $ossec_auth = 'cyb3rhq/fragments/_auth.erb'
+  $ossec_cluster = 'cyb3rhq/fragments/_cluster.erb'
+  $ossec_active_response_template = 'cyb3rhq/fragments/_activeresponse.erb'
 
   # ossec.conf blocks
 
   ## Server block configuration
-  $wazuh_register_endpoint = undef
-  $wazuh_reporting_endpoint = undef
+  $cyb3rhq_register_endpoint = undef
+  $cyb3rhq_reporting_endpoint = undef
   $ossec_port = '1514'
   $ossec_protocol = 'tcp'
-  $wazuh_max_retries = '5'
-  $wazuh_retry_interval = '5'
+  $cyb3rhq_max_retries = '5'
+  $cyb3rhq_retry_interval = '5'
   $ossec_config_ubuntu_profiles = 'ubuntu, ubuntu18, ubuntu18.04'
   $ossec_config_centos_profiles = 'centos, centos7, centos7.6'
   $ossec_notify_time = 10
@@ -80,27 +80,27 @@ class wazuh::params_agent {
   $active_response_repeated_offenders              = []
 
   # agent autoenrollment
-  $wazuh_enrollment_enabled                        = undef
-  $wazuh_enrollment_manager_address                = undef
-  $wazuh_enrollment_port                           = undef
-  $wazuh_enrollment_agent_name                     = undef
-  $wazuh_enrollment_groups                         = undef
-  $wazuh_enrollment_agent_address                  = undef
-  $wazuh_enrollment_ssl_cipher                     = undef
-  $wazuh_enrollment_server_ca_path                 = undef
-  $wazuh_enrollment_agent_cert_path                = undef
-  $wazuh_enrollment_agent_key_path                 = undef
-  $wazuh_enrollment_auth_pass                      = undef
-  $wazuh_enrollment_auth_pass_path                 = $authd_pass_file
-  $wazuh_enrollment_auto_method                    = undef
-  $wazuh_delay_after_enrollment                    = undef
-  $wazuh_enrollment_use_source_ip                  = undef
+  $cyb3rhq_enrollment_enabled                        = undef
+  $cyb3rhq_enrollment_manager_address                = undef
+  $cyb3rhq_enrollment_port                           = undef
+  $cyb3rhq_enrollment_agent_name                     = undef
+  $cyb3rhq_enrollment_groups                         = undef
+  $cyb3rhq_enrollment_agent_address                  = undef
+  $cyb3rhq_enrollment_ssl_cipher                     = undef
+  $cyb3rhq_enrollment_server_ca_path                 = undef
+  $cyb3rhq_enrollment_agent_cert_path                = undef
+  $cyb3rhq_enrollment_agent_key_path                 = undef
+  $cyb3rhq_enrollment_auth_pass                      = undef
+  $cyb3rhq_enrollment_auth_pass_path                 = $authd_pass_file
+  $cyb3rhq_enrollment_auto_method                    = undef
+  $cyb3rhq_delay_after_enrollment                    = undef
+  $cyb3rhq_enrollment_use_source_ip                  = undef
 
   # Other required to define variables
   $manage_firewall = false
   $selinux = false
   $configure_labels = false
-  $ossec_labels_template = 'wazuh/fragments/_labels.erb'
+  $ossec_labels_template = 'cyb3rhq/fragments/_labels.erb'
   $ossec_labels = []
 
 
@@ -229,30 +229,30 @@ class wazuh::params_agent {
   # OS specific configurations
   case $::kernel {
     'Linux': {
-      $agent_package_name = 'wazuh-agent'
-      $agent_service_name = 'wazuh-agent'
+      $agent_package_name = 'cyb3rhq-agent'
+      $agent_service_name = 'cyb3rhq-agent'
 
       $download_path = '/tmp'
 
-      # Wazuh config folders and modes
+      # Cyb3rhq config folders and modes
       $config_file = '/var/ossec/etc/ossec.conf'
       $shared_agent_config_file = '/var/ossec/etc/shared/agent.conf'
 
       $config_mode = '0640'
       $config_owner = 'root'
-      $config_group = 'wazuh'
+      $config_group = 'cyb3rhq'
 
       $keys_file = '/var/ossec/etc/client.keys'
       $keys_mode = '0640'
       $keys_owner = 'root'
-      $keys_group = 'wazuh'
+      $keys_group = 'cyb3rhq'
 
       $validate_cmd_conf = '/var/ossec/bin/verify-agent-conf -f %'
 
       $processlist_file = '/var/ossec/bin/.process_list'
       $processlist_mode = '0640'
       $processlist_owner = 'root'
-      $processlist_group = 'wazuh'
+      $processlist_group = 'cyb3rhq'
 
       # ossec.conf blocks
 
@@ -335,8 +335,8 @@ class wazuh::params_agent {
               }
             }
             /^(wheezy|stretch|buster|bullseye|bookworm|sid|precise|trusty|vivid|wily|xenial|bionic|focal|groovy|jammy)$/: {
-              $server_service = 'wazuh-manager'
-              $server_package = 'wazuh-manager'
+              $server_service = 'cyb3rhq-manager'
+              $server_package = 'cyb3rhq-manager'
               $wodle_openscap_content = undef
             }
             default: {
@@ -497,8 +497,8 @@ class wazuh::params_agent {
 
       $keys_file = 'C:\\Program Files (x86)\\ossec-agent\\client.keys'
 
-      $agent_package_name = 'Wazuh Agent'
-      $agent_service_name = 'WazuhSvc'
+      $agent_package_name = 'Cyb3rhq Agent'
+      $agent_service_name = 'Cyb3rhqSvc'
       $service_has_status = true
       $ossec_service_provider = undef
 

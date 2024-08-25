@@ -1,247 +1,247 @@
-# Copyright (C) 2015, Wazuh Inc.
+# Copyright (C) 2015, Cyb3rhq Inc.
 
-# Puppet class that installs and manages the Wazuh agent
-class wazuh::agent (
+# Puppet class that installs and manages the Cyb3rhq agent
+class cyb3rhq::agent (
 
   # Versioning and package names
 
-  $agent_package_version             = $wazuh::params_agent::agent_package_version,
-  $agent_package_revision            = $wazuh::params_agent::agent_package_revision,
-  $agent_package_name                = $wazuh::params_agent::agent_package_name,
-  $agent_service_name                = $wazuh::params_agent::agent_service_name,
-  $agent_service_ensure              = $wazuh::params_agent::agent_service_ensure,
-  $agent_msi_download_location       = $wazuh::params_agent::agent_msi_download_location,
+  $agent_package_version             = $cyb3rhq::params_agent::agent_package_version,
+  $agent_package_revision            = $cyb3rhq::params_agent::agent_package_revision,
+  $agent_package_name                = $cyb3rhq::params_agent::agent_package_name,
+  $agent_service_name                = $cyb3rhq::params_agent::agent_service_name,
+  $agent_service_ensure              = $cyb3rhq::params_agent::agent_service_ensure,
+  $agent_msi_download_location       = $cyb3rhq::params_agent::agent_msi_download_location,
 
   # Authd registration options
-  $manage_client_keys                = $wazuh::params_agent::manage_client_keys,
-  $agent_name                        = $wazuh::params_agent::agent_name,
-  $agent_group                       = $wazuh::params_agent::agent_group,
-  $agent_address                     = $wazuh::params_agent::agent_address,
-  $wazuh_agent_cert                  = $wazuh::params_agent::wazuh_agent_cert,
-  $wazuh_agent_key                   = $wazuh::params_agent::wazuh_agent_key,
-  $wazuh_agent_cert_path             = $wazuh::params_agent::wazuh_agent_cert_path,
-  $wazuh_agent_key_path              = $wazuh::params_agent::wazuh_agent_key_path,
-  $agent_auth_password               = $wazuh::params_agent::agent_auth_password,
-  $wazuh_manager_root_ca_pem         = $wazuh::params_agent::wazuh_manager_root_ca_pem,
-  $wazuh_manager_root_ca_pem_path    = $wazuh::params_agent::wazuh_manager_root_ca_pem_path,
+  $manage_client_keys                = $cyb3rhq::params_agent::manage_client_keys,
+  $agent_name                        = $cyb3rhq::params_agent::agent_name,
+  $agent_group                       = $cyb3rhq::params_agent::agent_group,
+  $agent_address                     = $cyb3rhq::params_agent::agent_address,
+  $cyb3rhq_agent_cert                  = $cyb3rhq::params_agent::cyb3rhq_agent_cert,
+  $cyb3rhq_agent_key                   = $cyb3rhq::params_agent::cyb3rhq_agent_key,
+  $cyb3rhq_agent_cert_path             = $cyb3rhq::params_agent::cyb3rhq_agent_cert_path,
+  $cyb3rhq_agent_key_path              = $cyb3rhq::params_agent::cyb3rhq_agent_key_path,
+  $agent_auth_password               = $cyb3rhq::params_agent::agent_auth_password,
+  $cyb3rhq_manager_root_ca_pem         = $cyb3rhq::params_agent::cyb3rhq_manager_root_ca_pem,
+  $cyb3rhq_manager_root_ca_pem_path    = $cyb3rhq::params_agent::cyb3rhq_manager_root_ca_pem_path,
 
   ## ossec.conf generation parameters
   # Generation variables
-  $configure_rootcheck               = $wazuh::params_agent::configure_rootcheck,
-  $configure_wodle_openscap          = $wazuh::params_agent::configure_wodle_openscap,
-  $configure_wodle_cis_cat           = $wazuh::params_agent::configure_wodle_cis_cat,
-  $configure_wodle_osquery           = $wazuh::params_agent::configure_wodle_osquery,
-  $configure_wodle_syscollector      = $wazuh::params_agent::configure_wodle_syscollector,
-  $configure_wodle_docker_listener   = $wazuh::params_agent::configure_wodle_docker_listener,
-  $configure_sca                     = $wazuh::params_agent::configure_sca,
-  $configure_syscheck                = $wazuh::params_agent::configure_syscheck,
-  $configure_localfile               = $wazuh::params_agent::configure_localfile,
-  $configure_active_response         = $wazuh::params_agent::configure_active_response,
-  $configure_labels                  = $wazuh::params_agent::configure_labels,
+  $configure_rootcheck               = $cyb3rhq::params_agent::configure_rootcheck,
+  $configure_wodle_openscap          = $cyb3rhq::params_agent::configure_wodle_openscap,
+  $configure_wodle_cis_cat           = $cyb3rhq::params_agent::configure_wodle_cis_cat,
+  $configure_wodle_osquery           = $cyb3rhq::params_agent::configure_wodle_osquery,
+  $configure_wodle_syscollector      = $cyb3rhq::params_agent::configure_wodle_syscollector,
+  $configure_wodle_docker_listener   = $cyb3rhq::params_agent::configure_wodle_docker_listener,
+  $configure_sca                     = $cyb3rhq::params_agent::configure_sca,
+  $configure_syscheck                = $cyb3rhq::params_agent::configure_syscheck,
+  $configure_localfile               = $cyb3rhq::params_agent::configure_localfile,
+  $configure_active_response         = $cyb3rhq::params_agent::configure_active_response,
+  $configure_labels                  = $cyb3rhq::params_agent::configure_labels,
 
   # Templates paths
-  $ossec_conf_template                  = $wazuh::params_agent::ossec_conf_template,
-  $ossec_rootcheck_template             = $wazuh::params_agent::ossec_rootcheck_template,
-  $ossec_wodle_openscap_template        = $wazuh::params_agent::ossec_wodle_openscap_template,
-  $ossec_wodle_cis_cat_template         = $wazuh::params_agent::ossec_wodle_cis_cat_template,
-  $ossec_wodle_osquery_template         = $wazuh::params_agent::ossec_wodle_osquery_template,
-  $ossec_wodle_syscollector_template    = $wazuh::params_agent::ossec_wodle_syscollector_template,
-  $ossec_wodle_docker_listener_template = $wazuh::params_agent::ossec_wodle_docker_listener_template,
-  $ossec_sca_template                   = $wazuh::params_agent::ossec_sca_template,
-  $ossec_syscheck_template              = $wazuh::params_agent::ossec_syscheck_template,
-  $ossec_localfile_template             = $wazuh::params_agent::ossec_localfile_template,
-  $ossec_auth                           = $wazuh::params_agent::ossec_auth,
-  $ossec_cluster                        = $wazuh::params_agent::ossec_cluster,
-  $ossec_active_response_template       = $wazuh::params_agent::ossec_active_response_template,
-  $ossec_labels_template                = $wazuh::params_agent::ossec_labels_template,
+  $ossec_conf_template                  = $cyb3rhq::params_agent::ossec_conf_template,
+  $ossec_rootcheck_template             = $cyb3rhq::params_agent::ossec_rootcheck_template,
+  $ossec_wodle_openscap_template        = $cyb3rhq::params_agent::ossec_wodle_openscap_template,
+  $ossec_wodle_cis_cat_template         = $cyb3rhq::params_agent::ossec_wodle_cis_cat_template,
+  $ossec_wodle_osquery_template         = $cyb3rhq::params_agent::ossec_wodle_osquery_template,
+  $ossec_wodle_syscollector_template    = $cyb3rhq::params_agent::ossec_wodle_syscollector_template,
+  $ossec_wodle_docker_listener_template = $cyb3rhq::params_agent::ossec_wodle_docker_listener_template,
+  $ossec_sca_template                   = $cyb3rhq::params_agent::ossec_sca_template,
+  $ossec_syscheck_template              = $cyb3rhq::params_agent::ossec_syscheck_template,
+  $ossec_localfile_template             = $cyb3rhq::params_agent::ossec_localfile_template,
+  $ossec_auth                           = $cyb3rhq::params_agent::ossec_auth,
+  $ossec_cluster                        = $cyb3rhq::params_agent::ossec_cluster,
+  $ossec_active_response_template       = $cyb3rhq::params_agent::ossec_active_response_template,
+  $ossec_labels_template                = $cyb3rhq::params_agent::ossec_labels_template,
 
   # Server configuration
 
-  $wazuh_register_endpoint           = $wazuh::params_agent::wazuh_register_endpoint,
-  $wazuh_reporting_endpoint          = $wazuh::params_agent::wazuh_reporting_endpoint,
-  $ossec_port                        = $wazuh::params_agent::ossec_port,
-  $ossec_protocol                    = $wazuh::params_agent::ossec_protocol,
-  $wazuh_max_retries                 = $wazuh::params_agent::wazuh_max_retries,
-  $wazuh_retry_interval              = $wazuh::params_agent::wazuh_retry_interval,
-  $ossec_config_ubuntu_profiles      = $wazuh::params_agent::ossec_config_ubuntu_profiles,
-  $ossec_config_centos_profiles      = $wazuh::params_agent::ossec_config_centos_profiles,
-  $ossec_notify_time                 = $wazuh::params_agent::ossec_notify_time,
-  $ossec_time_reconnect              = $wazuh::params_agent::ossec_time_reconnect,
-  $ossec_auto_restart                = $wazuh::params_agent::ossec_auto_restart,
-  $ossec_crypto_method               = $wazuh::params_agent::ossec_crypto_method,
-  $client_buffer_disabled            = $wazuh::params_agent::client_buffer_disabled,
-  $client_buffer_queue_size          = $wazuh::params_agent::client_buffer_queue_size,
-  $client_buffer_events_per_second   = $wazuh::params_agent::client_buffer_events_per_second,
+  $cyb3rhq_register_endpoint           = $cyb3rhq::params_agent::cyb3rhq_register_endpoint,
+  $cyb3rhq_reporting_endpoint          = $cyb3rhq::params_agent::cyb3rhq_reporting_endpoint,
+  $ossec_port                        = $cyb3rhq::params_agent::ossec_port,
+  $ossec_protocol                    = $cyb3rhq::params_agent::ossec_protocol,
+  $cyb3rhq_max_retries                 = $cyb3rhq::params_agent::cyb3rhq_max_retries,
+  $cyb3rhq_retry_interval              = $cyb3rhq::params_agent::cyb3rhq_retry_interval,
+  $ossec_config_ubuntu_profiles      = $cyb3rhq::params_agent::ossec_config_ubuntu_profiles,
+  $ossec_config_centos_profiles      = $cyb3rhq::params_agent::ossec_config_centos_profiles,
+  $ossec_notify_time                 = $cyb3rhq::params_agent::ossec_notify_time,
+  $ossec_time_reconnect              = $cyb3rhq::params_agent::ossec_time_reconnect,
+  $ossec_auto_restart                = $cyb3rhq::params_agent::ossec_auto_restart,
+  $ossec_crypto_method               = $cyb3rhq::params_agent::ossec_crypto_method,
+  $client_buffer_disabled            = $cyb3rhq::params_agent::client_buffer_disabled,
+  $client_buffer_queue_size          = $cyb3rhq::params_agent::client_buffer_queue_size,
+  $client_buffer_events_per_second   = $cyb3rhq::params_agent::client_buffer_events_per_second,
 
   # Auto enrollment configuration
 
-  $wazuh_enrollment_enabled          = $wazuh::params_agent::wazuh_enrollment_enabled,
-  $wazuh_enrollment_manager_address  = $wazuh::params_agent::wazuh_enrollment_manager_address,
-  $wazuh_enrollment_port             = $wazuh::params_agent::wazuh_enrollment_port,
-  $wazuh_enrollment_agent_name       = $wazuh::params_agent::wazuh_enrollment_agent_name,
-  $wazuh_enrollment_groups           = $wazuh::params_agent::wazuh_enrollment_groups,
-  $wazuh_enrollment_agent_address    = $wazuh::params_agent::wazuh_enrollment_agent_address,
-  $wazuh_enrollment_ssl_cipher       = $wazuh::params_agent::wazuh_enrollment_ssl_cipher,
-  $wazuh_enrollment_server_ca_path   = $wazuh::params_agent::wazuh_enrollment_server_ca_path,
-  $wazuh_enrollment_agent_cert_path  = $wazuh::params_agent::wazuh_enrollment_agent_cert_path,
-  $wazuh_enrollment_agent_key_path   = $wazuh::params_agent::wazuh_enrollment_agent_key_path,
-  $wazuh_enrollment_auth_pass        = $wazuh::params_agent::wazuh_enrollment_auth_pass,
-  $wazuh_enrollment_auth_pass_path   = $wazuh::params_agent::wazuh_enrollment_auth_pass_path,
-  $wazuh_enrollment_auto_method      = $wazuh::params_agent::wazuh_enrollment_auto_method,
-  $wazuh_delay_after_enrollment      = $wazuh::params_agent::wazuh_delay_after_enrollment,
-  $wazuh_enrollment_use_source_ip    = $wazuh::params_agent::wazuh_enrollment_use_source_ip,
+  $cyb3rhq_enrollment_enabled          = $cyb3rhq::params_agent::cyb3rhq_enrollment_enabled,
+  $cyb3rhq_enrollment_manager_address  = $cyb3rhq::params_agent::cyb3rhq_enrollment_manager_address,
+  $cyb3rhq_enrollment_port             = $cyb3rhq::params_agent::cyb3rhq_enrollment_port,
+  $cyb3rhq_enrollment_agent_name       = $cyb3rhq::params_agent::cyb3rhq_enrollment_agent_name,
+  $cyb3rhq_enrollment_groups           = $cyb3rhq::params_agent::cyb3rhq_enrollment_groups,
+  $cyb3rhq_enrollment_agent_address    = $cyb3rhq::params_agent::cyb3rhq_enrollment_agent_address,
+  $cyb3rhq_enrollment_ssl_cipher       = $cyb3rhq::params_agent::cyb3rhq_enrollment_ssl_cipher,
+  $cyb3rhq_enrollment_server_ca_path   = $cyb3rhq::params_agent::cyb3rhq_enrollment_server_ca_path,
+  $cyb3rhq_enrollment_agent_cert_path  = $cyb3rhq::params_agent::cyb3rhq_enrollment_agent_cert_path,
+  $cyb3rhq_enrollment_agent_key_path   = $cyb3rhq::params_agent::cyb3rhq_enrollment_agent_key_path,
+  $cyb3rhq_enrollment_auth_pass        = $cyb3rhq::params_agent::cyb3rhq_enrollment_auth_pass,
+  $cyb3rhq_enrollment_auth_pass_path   = $cyb3rhq::params_agent::cyb3rhq_enrollment_auth_pass_path,
+  $cyb3rhq_enrollment_auto_method      = $cyb3rhq::params_agent::cyb3rhq_enrollment_auto_method,
+  $cyb3rhq_delay_after_enrollment      = $cyb3rhq::params_agent::cyb3rhq_delay_after_enrollment,
+  $cyb3rhq_enrollment_use_source_ip    = $cyb3rhq::params_agent::cyb3rhq_enrollment_use_source_ip,
 
 
   # Rootcheck
-  $ossec_rootcheck_disabled           = $wazuh::params_agent::ossec_rootcheck_disabled,
-  $ossec_rootcheck_check_files        = $wazuh::params_agent::ossec_rootcheck_check_files,
-  $ossec_rootcheck_check_trojans      = $wazuh::params_agent::ossec_rootcheck_check_trojans,
-  $ossec_rootcheck_check_dev          = $wazuh::params_agent::ossec_rootcheck_check_dev,
-  $ossec_rootcheck_check_sys          = $wazuh::params_agent::ossec_rootcheck_check_sys,
-  $ossec_rootcheck_check_pids         = $wazuh::params_agent::ossec_rootcheck_check_pids,
-  $ossec_rootcheck_check_ports        = $wazuh::params_agent::ossec_rootcheck_check_ports,
-  $ossec_rootcheck_check_if           = $wazuh::params_agent::ossec_rootcheck_check_if,
-  $ossec_rootcheck_frequency          = $wazuh::params_agent::ossec_rootcheck_frequency,
-  $ossec_rootcheck_ignore_list        = $wazuh::params_agent::ossec_rootcheck_ignore_list,
-  $ossec_rootcheck_ignore_sregex_list = $wazuh::params_agent::ossec_rootcheck_ignore_sregex_list,
-  $ossec_rootcheck_rootkit_files      = $wazuh::params_agent::ossec_rootcheck_rootkit_files,
-  $ossec_rootcheck_rootkit_trojans    = $wazuh::params_agent::ossec_rootcheck_rootkit_trojans,
-  $ossec_rootcheck_skip_nfs           = $wazuh::params_agent::ossec_rootcheck_skip_nfs,
-  $ossec_rootcheck_system_audit      = $wazuh::params_agent::ossec_rootcheck_system_audit,
+  $ossec_rootcheck_disabled           = $cyb3rhq::params_agent::ossec_rootcheck_disabled,
+  $ossec_rootcheck_check_files        = $cyb3rhq::params_agent::ossec_rootcheck_check_files,
+  $ossec_rootcheck_check_trojans      = $cyb3rhq::params_agent::ossec_rootcheck_check_trojans,
+  $ossec_rootcheck_check_dev          = $cyb3rhq::params_agent::ossec_rootcheck_check_dev,
+  $ossec_rootcheck_check_sys          = $cyb3rhq::params_agent::ossec_rootcheck_check_sys,
+  $ossec_rootcheck_check_pids         = $cyb3rhq::params_agent::ossec_rootcheck_check_pids,
+  $ossec_rootcheck_check_ports        = $cyb3rhq::params_agent::ossec_rootcheck_check_ports,
+  $ossec_rootcheck_check_if           = $cyb3rhq::params_agent::ossec_rootcheck_check_if,
+  $ossec_rootcheck_frequency          = $cyb3rhq::params_agent::ossec_rootcheck_frequency,
+  $ossec_rootcheck_ignore_list        = $cyb3rhq::params_agent::ossec_rootcheck_ignore_list,
+  $ossec_rootcheck_ignore_sregex_list = $cyb3rhq::params_agent::ossec_rootcheck_ignore_sregex_list,
+  $ossec_rootcheck_rootkit_files      = $cyb3rhq::params_agent::ossec_rootcheck_rootkit_files,
+  $ossec_rootcheck_rootkit_trojans    = $cyb3rhq::params_agent::ossec_rootcheck_rootkit_trojans,
+  $ossec_rootcheck_skip_nfs           = $cyb3rhq::params_agent::ossec_rootcheck_skip_nfs,
+  $ossec_rootcheck_system_audit      = $cyb3rhq::params_agent::ossec_rootcheck_system_audit,
 
 
   # rootcheck windows
-  $ossec_rootcheck_windows_disabled        = $wazuh::params_agent::ossec_rootcheck_windows_disabled,
-  $ossec_rootcheck_windows_windows_apps    = $wazuh::params_agent::ossec_rootcheck_windows_windows_apps,
-  $ossec_rootcheck_windows_windows_malware = $wazuh::params_agent::ossec_rootcheck_windows_windows_malware,
+  $ossec_rootcheck_windows_disabled        = $cyb3rhq::params_agent::ossec_rootcheck_windows_disabled,
+  $ossec_rootcheck_windows_windows_apps    = $cyb3rhq::params_agent::ossec_rootcheck_windows_windows_apps,
+  $ossec_rootcheck_windows_windows_malware = $cyb3rhq::params_agent::ossec_rootcheck_windows_windows_malware,
 
   # SCA
 
   ## Amazon
-  $sca_amazon_enabled = $wazuh::params_agent::sca_amazon_enabled,
-  $sca_amazon_scan_on_start = $wazuh::params_agent::sca_amazon_scan_on_start,
-  $sca_amazon_interval = $wazuh::params_agent::sca_amazon_interval,
-  $sca_amazon_skip_nfs = $wazuh::params_agent::sca_amazon_skip_nfs,
-  $sca_amazon_policies = $wazuh::params_agent::sca_amazon_policies,
+  $sca_amazon_enabled = $cyb3rhq::params_agent::sca_amazon_enabled,
+  $sca_amazon_scan_on_start = $cyb3rhq::params_agent::sca_amazon_scan_on_start,
+  $sca_amazon_interval = $cyb3rhq::params_agent::sca_amazon_interval,
+  $sca_amazon_skip_nfs = $cyb3rhq::params_agent::sca_amazon_skip_nfs,
+  $sca_amazon_policies = $cyb3rhq::params_agent::sca_amazon_policies,
 
   ## RHEL
-  $sca_rhel_enabled = $wazuh::params_agent::sca_rhel_enabled,
-  $sca_rhel_scan_on_start = $wazuh::params_agent::sca_rhel_scan_on_start,
-  $sca_rhel_interval = $wazuh::params_agent::sca_rhel_interval,
-  $sca_rhel_skip_nfs = $wazuh::params_agent::sca_rhel_skip_nfs,
-  $sca_rhel_policies = $wazuh::params_agent::sca_rhel_policies,
+  $sca_rhel_enabled = $cyb3rhq::params_agent::sca_rhel_enabled,
+  $sca_rhel_scan_on_start = $cyb3rhq::params_agent::sca_rhel_scan_on_start,
+  $sca_rhel_interval = $cyb3rhq::params_agent::sca_rhel_interval,
+  $sca_rhel_skip_nfs = $cyb3rhq::params_agent::sca_rhel_skip_nfs,
+  $sca_rhel_policies = $cyb3rhq::params_agent::sca_rhel_policies,
 
   ## <Linux else>
-  $sca_else_enabled = $wazuh::params_agent::sca_else_enabled,
-  $sca_else_scan_on_start = $wazuh::params_agent::sca_else_scan_on_start,
-  $sca_else_interval = $wazuh::params_agent::sca_else_interval,
-  $sca_else_skip_nfs = $wazuh::params_agent::sca_else_skip_nfs,
-  $sca_else_policies = $wazuh::params_agent::sca_else_policies,
+  $sca_else_enabled = $cyb3rhq::params_agent::sca_else_enabled,
+  $sca_else_scan_on_start = $cyb3rhq::params_agent::sca_else_scan_on_start,
+  $sca_else_interval = $cyb3rhq::params_agent::sca_else_interval,
+  $sca_else_skip_nfs = $cyb3rhq::params_agent::sca_else_skip_nfs,
+  $sca_else_policies = $cyb3rhq::params_agent::sca_else_policies,
 
-  $sca_windows_enabled = $wazuh::params_agent::sca_windows_enabled,
-  $sca_windows_scan_on_start = $wazuh::params_agent::sca_windows_scan_on_start,
-  $sca_windows_interval = $wazuh::params_agent::sca_windows_interval,
-  $sca_windows_skip_nfs = $wazuh::params_agent::sca_windows_skip_nfs,
-  $sca_windows_policies = $wazuh::params_agent::sca_windows_policies,
+  $sca_windows_enabled = $cyb3rhq::params_agent::sca_windows_enabled,
+  $sca_windows_scan_on_start = $cyb3rhq::params_agent::sca_windows_scan_on_start,
+  $sca_windows_interval = $cyb3rhq::params_agent::sca_windows_interval,
+  $sca_windows_skip_nfs = $cyb3rhq::params_agent::sca_windows_skip_nfs,
+  $sca_windows_policies = $cyb3rhq::params_agent::sca_windows_policies,
 
   ## Wodles
 
   # Openscap
-  $wodle_openscap_disabled           = $wazuh::params_agent::wodle_openscap_disabled,
-  $wodle_openscap_timeout            = $wazuh::params_agent::wodle_openscap_timeout,
-  $wodle_openscap_interval           = $wazuh::params_agent::wodle_openscap_interval,
-  $wodle_openscap_scan_on_start      = $wazuh::params_agent::wodle_openscap_scan_on_start,
+  $wodle_openscap_disabled           = $cyb3rhq::params_agent::wodle_openscap_disabled,
+  $wodle_openscap_timeout            = $cyb3rhq::params_agent::wodle_openscap_timeout,
+  $wodle_openscap_interval           = $cyb3rhq::params_agent::wodle_openscap_interval,
+  $wodle_openscap_scan_on_start      = $cyb3rhq::params_agent::wodle_openscap_scan_on_start,
 
   # Ciscat
-  $wodle_ciscat_disabled             = $wazuh::params_agent::wodle_ciscat_disabled,
-  $wodle_ciscat_timeout              = $wazuh::params_agent::wodle_ciscat_timeout,
-  $wodle_ciscat_interval             = $wazuh::params_agent::wodle_ciscat_interval,
-  $wodle_ciscat_scan_on_start        = $wazuh::params_agent::wodle_ciscat_scan_on_start,
-  $wodle_ciscat_java_path            = $wazuh::params_agent::wodle_ciscat_java_path,
-  $wodle_ciscat_ciscat_path          = $wazuh::params_agent::wodle_ciscat_ciscat_path,
+  $wodle_ciscat_disabled             = $cyb3rhq::params_agent::wodle_ciscat_disabled,
+  $wodle_ciscat_timeout              = $cyb3rhq::params_agent::wodle_ciscat_timeout,
+  $wodle_ciscat_interval             = $cyb3rhq::params_agent::wodle_ciscat_interval,
+  $wodle_ciscat_scan_on_start        = $cyb3rhq::params_agent::wodle_ciscat_scan_on_start,
+  $wodle_ciscat_java_path            = $cyb3rhq::params_agent::wodle_ciscat_java_path,
+  $wodle_ciscat_ciscat_path          = $cyb3rhq::params_agent::wodle_ciscat_ciscat_path,
 
   #Osquery
 
-  $wodle_osquery_disabled            = $wazuh::params_agent::wodle_osquery_disabled,
-  $wodle_osquery_run_daemon          = $wazuh::params_agent::wodle_osquery_run_daemon,
-  $wodle_osquery_bin_path            = $wazuh::params_agent::wodle_osquery_bin_path,
-  $wodle_osquery_log_path            = $wazuh::params_agent::wodle_osquery_log_path,
-  $wodle_osquery_config_path         = $wazuh::params_agent::wodle_osquery_config_path,
-  $wodle_osquery_add_labels          = $wazuh::params_agent::wodle_osquery_add_labels,
+  $wodle_osquery_disabled            = $cyb3rhq::params_agent::wodle_osquery_disabled,
+  $wodle_osquery_run_daemon          = $cyb3rhq::params_agent::wodle_osquery_run_daemon,
+  $wodle_osquery_bin_path            = $cyb3rhq::params_agent::wodle_osquery_bin_path,
+  $wodle_osquery_log_path            = $cyb3rhq::params_agent::wodle_osquery_log_path,
+  $wodle_osquery_config_path         = $cyb3rhq::params_agent::wodle_osquery_config_path,
+  $wodle_osquery_add_labels          = $cyb3rhq::params_agent::wodle_osquery_add_labels,
 
   # Syscollector
 
-  $wodle_syscollector_disabled       = $wazuh::params_agent::wodle_syscollector_disabled,
-  $wodle_syscollector_interval       = $wazuh::params_agent::wodle_syscollector_interval,
-  $wodle_syscollector_scan_on_start  = $wazuh::params_agent::wodle_syscollector_scan_on_start,
-  $wodle_syscollector_hardware       = $wazuh::params_agent::wodle_syscollector_hardware,
-  $wodle_syscollector_os             = $wazuh::params_agent::wodle_syscollector_os,
-  $wodle_syscollector_network        = $wazuh::params_agent::wodle_syscollector_network,
-  $wodle_syscollector_packages       = $wazuh::params_agent::wodle_syscollector_packages,
-  $wodle_syscollector_ports          = $wazuh::params_agent::wodle_syscollector_ports,
-  $wodle_syscollector_processes      = $wazuh::params_agent::wodle_syscollector_processes,
-  $wodle_syscollector_hotfixes       = $wazuh::params_agent::wodle_syscollector_hotfixes,
+  $wodle_syscollector_disabled       = $cyb3rhq::params_agent::wodle_syscollector_disabled,
+  $wodle_syscollector_interval       = $cyb3rhq::params_agent::wodle_syscollector_interval,
+  $wodle_syscollector_scan_on_start  = $cyb3rhq::params_agent::wodle_syscollector_scan_on_start,
+  $wodle_syscollector_hardware       = $cyb3rhq::params_agent::wodle_syscollector_hardware,
+  $wodle_syscollector_os             = $cyb3rhq::params_agent::wodle_syscollector_os,
+  $wodle_syscollector_network        = $cyb3rhq::params_agent::wodle_syscollector_network,
+  $wodle_syscollector_packages       = $cyb3rhq::params_agent::wodle_syscollector_packages,
+  $wodle_syscollector_ports          = $cyb3rhq::params_agent::wodle_syscollector_ports,
+  $wodle_syscollector_processes      = $cyb3rhq::params_agent::wodle_syscollector_processes,
+  $wodle_syscollector_hotfixes       = $cyb3rhq::params_agent::wodle_syscollector_hotfixes,
 
   # Docker-listener
-  $wodle_docker_listener_disabled    = $wazuh::params_agent::wodle_docker_listener_disabled,
+  $wodle_docker_listener_disabled    = $cyb3rhq::params_agent::wodle_docker_listener_disabled,
 
   # Localfile
-  $ossec_local_files                 = $wazuh::params_agent::default_local_files,
+  $ossec_local_files                 = $cyb3rhq::params_agent::default_local_files,
 
   # Syscheck
-  $ossec_syscheck_disabled           = $wazuh::params_agent::ossec_syscheck_disabled,
-  $ossec_syscheck_frequency          = $wazuh::params_agent::ossec_syscheck_frequency,
-  $ossec_syscheck_scan_on_start      = $wazuh::params_agent::ossec_syscheck_scan_on_start,
-  $ossec_syscheck_auto_ignore        = $wazuh::params_agent::ossec_syscheck_auto_ignore,
-  $ossec_syscheck_directories_1      = $wazuh::params_agent::ossec_syscheck_directories_1,
-  $ossec_syscheck_directories_2      = $wazuh::params_agent::ossec_syscheck_directories_2,
+  $ossec_syscheck_disabled           = $cyb3rhq::params_agent::ossec_syscheck_disabled,
+  $ossec_syscheck_frequency          = $cyb3rhq::params_agent::ossec_syscheck_frequency,
+  $ossec_syscheck_scan_on_start      = $cyb3rhq::params_agent::ossec_syscheck_scan_on_start,
+  $ossec_syscheck_auto_ignore        = $cyb3rhq::params_agent::ossec_syscheck_auto_ignore,
+  $ossec_syscheck_directories_1      = $cyb3rhq::params_agent::ossec_syscheck_directories_1,
+  $ossec_syscheck_directories_2      = $cyb3rhq::params_agent::ossec_syscheck_directories_2,
 
-  $ossec_syscheck_report_changes_directories_1            = $wazuh::params_agent::ossec_syscheck_report_changes_directories_1,
-  $ossec_syscheck_whodata_directories_1            = $wazuh::params_agent::ossec_syscheck_whodata_directories_1,
-  $ossec_syscheck_realtime_directories_1           = $wazuh::params_agent::ossec_syscheck_realtime_directories_1,
-  $ossec_syscheck_report_changes_directories_2         = $wazuh::params_agent::ossec_syscheck_report_changes_directories_2,
-  $ossec_syscheck_whodata_directories_2            = $wazuh::params_agent::ossec_syscheck_whodata_directories_2,
-  $ossec_syscheck_realtime_directories_2           = $wazuh::params_agent::ossec_syscheck_realtime_directories_2,
-  $ossec_syscheck_ignore_list        = $wazuh::params_agent::ossec_syscheck_ignore_list,
-  $ossec_syscheck_ignore_type_1      = $wazuh::params_agent::ossec_syscheck_ignore_type_1,
-  $ossec_syscheck_ignore_type_2      = $wazuh::params_agent::ossec_syscheck_ignore_type_2,
-  $ossec_syscheck_max_eps                      = $wazuh::params_agent::ossec_syscheck_max_eps,
-  $ossec_syscheck_process_priority             = $wazuh::params_agent::ossec_syscheck_process_priority,
-  $ossec_syscheck_synchronization_enabled      = $wazuh::params_agent::ossec_syscheck_synchronization_enabled,
-  $ossec_syscheck_synchronization_interval     = $wazuh::params_agent::ossec_syscheck_synchronization_interval,
-  $ossec_syscheck_synchronization_max_eps      = $wazuh::params_agent::ossec_syscheck_synchronization_max_eps,
-  $ossec_syscheck_synchronization_max_interval = $wazuh::params_agent::ossec_syscheck_synchronization_max_interval,
-  $ossec_syscheck_nodiff             = $wazuh::params_agent::ossec_syscheck_nodiff,
-  $ossec_syscheck_skip_nfs           = $wazuh::params_agent::ossec_syscheck_skip_nfs,
-  $ossec_syscheck_windows_audit_interval      = $wazuh::params_agent::windows_audit_interval,
+  $ossec_syscheck_report_changes_directories_1            = $cyb3rhq::params_agent::ossec_syscheck_report_changes_directories_1,
+  $ossec_syscheck_whodata_directories_1            = $cyb3rhq::params_agent::ossec_syscheck_whodata_directories_1,
+  $ossec_syscheck_realtime_directories_1           = $cyb3rhq::params_agent::ossec_syscheck_realtime_directories_1,
+  $ossec_syscheck_report_changes_directories_2         = $cyb3rhq::params_agent::ossec_syscheck_report_changes_directories_2,
+  $ossec_syscheck_whodata_directories_2            = $cyb3rhq::params_agent::ossec_syscheck_whodata_directories_2,
+  $ossec_syscheck_realtime_directories_2           = $cyb3rhq::params_agent::ossec_syscheck_realtime_directories_2,
+  $ossec_syscheck_ignore_list        = $cyb3rhq::params_agent::ossec_syscheck_ignore_list,
+  $ossec_syscheck_ignore_type_1      = $cyb3rhq::params_agent::ossec_syscheck_ignore_type_1,
+  $ossec_syscheck_ignore_type_2      = $cyb3rhq::params_agent::ossec_syscheck_ignore_type_2,
+  $ossec_syscheck_max_eps                      = $cyb3rhq::params_agent::ossec_syscheck_max_eps,
+  $ossec_syscheck_process_priority             = $cyb3rhq::params_agent::ossec_syscheck_process_priority,
+  $ossec_syscheck_synchronization_enabled      = $cyb3rhq::params_agent::ossec_syscheck_synchronization_enabled,
+  $ossec_syscheck_synchronization_interval     = $cyb3rhq::params_agent::ossec_syscheck_synchronization_interval,
+  $ossec_syscheck_synchronization_max_eps      = $cyb3rhq::params_agent::ossec_syscheck_synchronization_max_eps,
+  $ossec_syscheck_synchronization_max_interval = $cyb3rhq::params_agent::ossec_syscheck_synchronization_max_interval,
+  $ossec_syscheck_nodiff             = $cyb3rhq::params_agent::ossec_syscheck_nodiff,
+  $ossec_syscheck_skip_nfs           = $cyb3rhq::params_agent::ossec_syscheck_skip_nfs,
+  $ossec_syscheck_windows_audit_interval      = $cyb3rhq::params_agent::windows_audit_interval,
 
   # Audit
-  $audit_manage_rules                = $wazuh::params_agent::audit_manage_rules,
-  $audit_buffer_bytes                = $wazuh::params_agent::audit_buffer_bytes,
-  $audit_backlog_wait_time           = $wazuh::params_agent::audit_backlog_wait_time,
-  $audit_rules                       = $wazuh::params_agent::audit_rules,
+  $audit_manage_rules                = $cyb3rhq::params_agent::audit_manage_rules,
+  $audit_buffer_bytes                = $cyb3rhq::params_agent::audit_buffer_bytes,
+  $audit_backlog_wait_time           = $cyb3rhq::params_agent::audit_backlog_wait_time,
+  $audit_rules                       = $cyb3rhq::params_agent::audit_rules,
 
   # active-response
-  $ossec_active_response_disabled             =  $wazuh::params_agent::active_response_disabled,
-  $ossec_active_response_linux_ca_store       =  $wazuh::params_agent::active_response_linux_ca_store,
-  $ossec_active_response_ca_verification      =  $wazuh::params_agent::active_response_ca_verification,
-  $ossec_active_response_repeated_offenders   =  $wazuh::params_agent::active_response_repeated_offenders,
+  $ossec_active_response_disabled             =  $cyb3rhq::params_agent::active_response_disabled,
+  $ossec_active_response_linux_ca_store       =  $cyb3rhq::params_agent::active_response_linux_ca_store,
+  $ossec_active_response_ca_verification      =  $cyb3rhq::params_agent::active_response_ca_verification,
+  $ossec_active_response_repeated_offenders   =  $cyb3rhq::params_agent::active_response_repeated_offenders,
 
   # Agent Labels
-  $ossec_labels                      = $wazuh::params_agent::ossec_labels,
+  $ossec_labels                      = $cyb3rhq::params_agent::ossec_labels,
 
   ## Selinux
 
-  $selinux                           = $wazuh::params_agent::selinux,
-  $manage_firewall                   = $wazuh::params_agent::manage_firewall,
+  $selinux                           = $cyb3rhq::params_agent::selinux,
+  $manage_firewall                   = $cyb3rhq::params_agent::manage_firewall,
 
   ## Windows
 
-  $download_path                     = $wazuh::params_agent::download_path,
+  $download_path                     = $cyb3rhq::params_agent::download_path,
 
   # Logging
-  $logging_log_format                = $wazuh::params_agent::logging_log_format,
-) inherits wazuh::params_agent {
+  $logging_log_format                = $cyb3rhq::params_agent::logging_log_format,
+) inherits cyb3rhq::params_agent {
   # validate_bool(
   #   $ossec_active_response, $ossec_rootcheck,
   #   $selinux,
@@ -252,7 +252,7 @@ class wazuh::agent (
   validate_legacy(String, 'validate_string', $agent_service_name)
 
   if (( $ossec_syscheck_whodata_directories_1 == 'yes' ) or ( $ossec_syscheck_whodata_directories_2 == 'yes' )) {
-    class { 'wazuh::audit':
+    class { 'cyb3rhq::audit':
       audit_manage_rules      => $audit_manage_rules,
       audit_backlog_wait_time => $audit_backlog_wait_time,
       audit_buffer_bytes      => $audit_buffer_bytes,
@@ -262,8 +262,8 @@ class wazuh::agent (
 
 
   if $manage_client_keys == 'yes' {
-    if $wazuh_register_endpoint == undef {
-      fail('The $wazuh_register_endpoint parameter is needed in order to register the Agent.')
+    if $cyb3rhq_register_endpoint == undef {
+      fail('The $cyb3rhq_register_endpoint parameter is needed in order to register the Agent.')
     }
   }
 
@@ -279,11 +279,11 @@ class wazuh::agent (
         ensure => directory,
       }
 
-      -> file { 'wazuh-agent':
-        path               => "${download_path}\\wazuh-agent-${agent_package_version}-${agent_package_revision}.msi",
+      -> file { 'cyb3rhq-agent':
+        path               => "${download_path}\\cyb3rhq-agent-${agent_package_version}-${agent_package_revision}.msi",
         group              => 'Administrators',
         mode               => '0774',
-        source             => "${agent_msi_download_location}/wazuh-agent-${agent_package_version}-${agent_package_revision}.msi",
+        source             => "${agent_msi_download_location}/cyb3rhq-agent-${agent_package_version}-${agent_package_revision}.msi",
         source_permissions => ignore
       }
 
@@ -291,11 +291,11 @@ class wazuh::agent (
       -> package { $agent_package_name:
         ensure          => "${agent_package_version}",
         provider        => 'windows',
-        source          => "${download_path}\\wazuh-agent-${agent_package_version}-${agent_package_revision}.msi",
+        source          => "${download_path}\\cyb3rhq-agent-${agent_package_version}-${agent_package_revision}.msi",
         install_options => [
           '/q',
-          "WAZUH_MANAGER=${wazuh_reporting_endpoint}",
-          "WAZUH_PROTOCOL=${ossec_protocol}",
+          "CYB3RHQ_MANAGER=${cyb3rhq_reporting_endpoint}",
+          "CYB3RHQ_PROTOCOL=${ossec_protocol}",
         ],
       }
     }
@@ -343,10 +343,10 @@ class wazuh::agent (
 
 
   concat { 'agent_ossec.conf':
-    path    => $wazuh::params_agent::config_file,
-    owner   => $wazuh::params_agent::config_owner,
-    group   => $wazuh::params_agent::config_group,
-    mode    => $wazuh::params_agent::config_mode,
+    path    => $cyb3rhq::params_agent::config_file,
+    owner   => $cyb3rhq::params_agent::config_owner,
+    group   => $cyb3rhq::params_agent::config_group,
+    mode    => $cyb3rhq::params_agent::config_mode,
     before  => Service[$agent_service_name],
     require => Package[$agent_package_name],
     notify  => Service[$agent_service_name],
@@ -447,7 +447,7 @@ class wazuh::agent (
     }
   }
   if ($configure_active_response == true) {
-    wazuh::activeresponse { 'active-response configuration':
+    cyb3rhq::activeresponse { 'active-response configuration':
       active_response_disabled           =>  $ossec_active_response_disabled,
       active_response_linux_ca_store     =>  $ossec_active_response_linux_ca_store,
       active_response_ca_verification    =>  $ossec_active_response_ca_verification,
@@ -506,57 +506,57 @@ class wazuh::agent (
 
     case $::kernel {
       'Linux': {
-        file { $::wazuh::params_agent::keys_file:
-          owner => $wazuh::params_agent::keys_owner,
-          group => $wazuh::params_agent::keys_group,
-          mode  => $wazuh::params_agent::keys_mode,
+        file { $::cyb3rhq::params_agent::keys_file:
+          owner => $cyb3rhq::params_agent::keys_owner,
+          group => $cyb3rhq::params_agent::keys_group,
+          mode  => $cyb3rhq::params_agent::keys_mode,
         }
 
         $agent_auth_executable = '/var/ossec/bin/agent-auth'
-        $agent_auth_base_command = "${agent_auth_executable} -m ${wazuh_register_endpoint}"
+        $agent_auth_base_command = "${agent_auth_executable} -m ${cyb3rhq_register_endpoint}"
 
-        # https://documentation.wazuh.com/4.0/user-manual/registering/manager-verification/manager-verification-registration.html
-        if $wazuh_manager_root_ca_pem != undef {
-          validate_legacy(String, 'validate_string', $wazuh_manager_root_ca_pem)
+        # https://cyb3rhq.ghcr.io/documentation/4.0/user-manual/registering/manager-verification/manager-verification-registration.html
+        if $cyb3rhq_manager_root_ca_pem != undef {
+          validate_legacy(String, 'validate_string', $cyb3rhq_manager_root_ca_pem)
           file { '/var/ossec/etc/rootCA.pem':
-            owner   => $wazuh::params_agent::keys_owner,
-            group   => $wazuh::params_agent::keys_group,
-            mode    => $wazuh::params_agent::keys_mode,
-            content => $wazuh_manager_root_ca_pem,
+            owner   => $cyb3rhq::params_agent::keys_owner,
+            group   => $cyb3rhq::params_agent::keys_group,
+            mode    => $cyb3rhq::params_agent::keys_mode,
+            content => $cyb3rhq_manager_root_ca_pem,
             require => Package[$agent_package_name],
           }
           $agent_auth_option_manager = '-v /var/ossec/etc/rootCA.pem'
-        } elsif $wazuh_manager_root_ca_pem_path != undef {
-          validate_legacy(String, 'validate_string', $wazuh_manager_root_ca_pem)
-          $agent_auth_option_manager = "-v ${wazuh_manager_root_ca_pem_path}"
+        } elsif $cyb3rhq_manager_root_ca_pem_path != undef {
+          validate_legacy(String, 'validate_string', $cyb3rhq_manager_root_ca_pem)
+          $agent_auth_option_manager = "-v ${cyb3rhq_manager_root_ca_pem_path}"
         } else {
           $agent_auth_option_manager = ''  # Avoid errors when compounding final command
         }
 
-        # https://documentation.wazuh.com/4.0/user-manual/registering/manager-verification/agent-verification-registration.html
-        if ($wazuh_agent_cert != undef) and ($wazuh_agent_key != undef) {
-          validate_legacy(String, 'validate_string', $wazuh_agent_cert)
-          validate_legacy(String, 'validate_string', $wazuh_agent_key)
+        # https://cyb3rhq.ghcr.io/documentation/4.0/user-manual/registering/manager-verification/agent-verification-registration.html
+        if ($cyb3rhq_agent_cert != undef) and ($cyb3rhq_agent_key != undef) {
+          validate_legacy(String, 'validate_string', $cyb3rhq_agent_cert)
+          validate_legacy(String, 'validate_string', $cyb3rhq_agent_key)
           file { '/var/ossec/etc/sslagent.cert':
-            owner   => $wazuh::params_agent::keys_owner,
-            group   => $wazuh::params_agent::keys_group,
-            mode    => $wazuh::params_agent::keys_mode,
-            content => $wazuh_agent_cert,
+            owner   => $cyb3rhq::params_agent::keys_owner,
+            group   => $cyb3rhq::params_agent::keys_group,
+            mode    => $cyb3rhq::params_agent::keys_mode,
+            content => $cyb3rhq_agent_cert,
             require => Package[$agent_package_name],
           }
           file { '/var/ossec/etc/sslagent.key':
-            owner   => $wazuh::params_agent::keys_owner,
-            group   => $wazuh::params_agent::keys_group,
-            mode    => $wazuh::params_agent::keys_mode,
-            content => $wazuh_agent_key,
+            owner   => $cyb3rhq::params_agent::keys_owner,
+            group   => $cyb3rhq::params_agent::keys_group,
+            mode    => $cyb3rhq::params_agent::keys_mode,
+            content => $cyb3rhq_agent_key,
             require => Package[$agent_package_name],
           }
 
           $agent_auth_option_agent = '-x /var/ossec/etc/sslagent.cert -k /var/ossec/etc/sslagent.key'
-        } elsif ($wazuh_agent_cert_path != undef) and ($wazuh_agent_key_path != undef) {
-          validate_legacy(String, 'validate_string', $wazuh_agent_cert_path)
-          validate_legacy(String, 'validate_string', $wazuh_agent_key_path)
-          $agent_auth_option_agent = "-x ${wazuh_agent_cert_path} -k ${wazuh_agent_key_path}"
+        } elsif ($cyb3rhq_agent_cert_path != undef) and ($cyb3rhq_agent_key_path != undef) {
+          validate_legacy(String, 'validate_string', $cyb3rhq_agent_cert_path)
+          validate_legacy(String, 'validate_string', $cyb3rhq_agent_key_path)
+          $agent_auth_option_agent = "-x ${cyb3rhq_agent_cert_path} -k ${cyb3rhq_agent_key_path}"
         } else {
           $agent_auth_option_agent = ''
         }
@@ -567,7 +567,7 @@ class wazuh::agent (
         exec { 'agent-auth-linux':
           path    => ['/usr/bin', '/bin', '/usr/sbin', '/sbin'],
           command => $agent_auth_command,
-          unless  => "egrep -q '.' ${::wazuh::params_agent::keys_file}",
+          unless  => "egrep -q '.' ${::cyb3rhq::params_agent::keys_file}",
           require => Concat['agent_ossec.conf'],
           before  => Service[$agent_service_name],
           notify  => Service[$agent_service_name],
@@ -576,15 +576,15 @@ class wazuh::agent (
         service { $agent_service_name:
           ensure    => $agent_service_ensure,
           enable    => true,
-          hasstatus => $wazuh::params_agent::service_has_status,
-          pattern   => $wazuh::params_agent::agent_service_name,
-          provider  => $wazuh::params_agent::ossec_service_provider,
+          hasstatus => $cyb3rhq::params_agent::service_has_status,
+          pattern   => $cyb3rhq::params_agent::agent_service_name,
+          provider  => $cyb3rhq::params_agent::ossec_service_provider,
           require   => Package[$agent_package_name],
         }
       }
       'windows': {
         $agent_auth_executable = "'C:\\Program Files (x86)\\ossec-agent\\agent-auth.exe'"
-        $agent_auth_base_command = "& ${agent_auth_executable} -m \"${wazuh_register_endpoint}\""
+        $agent_auth_base_command = "& ${agent_auth_executable} -m \"${cyb3rhq_register_endpoint}\""
 
         # TODO: Implement the support for Manager verification using SSL
         # TODO: Implement the support for Agent verification using SSL
@@ -595,7 +595,7 @@ class wazuh::agent (
         exec { 'agent-auth-windows':
           command  => $agent_auth_command,
           provider => 'powershell',
-          onlyif   => "if ((Get-Item '${$::wazuh::params_agent::keys_file}').length -gt 0kb) {exit 1}",
+          onlyif   => "if ((Get-Item '${$::cyb3rhq::params_agent::keys_file}').length -gt 0kb) {exit 1}",
           require  => Concat['agent_ossec.conf'],
           before   => Service[$agent_service_name],
           notify   => Service[$agent_service_name],
@@ -604,9 +604,9 @@ class wazuh::agent (
         service { $agent_service_name:
           ensure    => $agent_service_ensure,
           enable    => true,
-          hasstatus => $wazuh::params_agent::service_has_status,
-          pattern   => $wazuh::params_agent::agent_service_name,
-          provider  => $wazuh::params_agent::ossec_service_provider,
+          hasstatus => $cyb3rhq::params_agent::service_has_status,
+          pattern   => $cyb3rhq::params_agent::agent_service_name,
+          provider  => $cyb3rhq::params_agent::ossec_service_provider,
           require   => Package[$agent_package_name],
         }
       }
@@ -616,9 +616,9 @@ class wazuh::agent (
     service { $agent_service_name:
       ensure    => stopped,
       enable    => false,
-      hasstatus => $wazuh::params_agent::service_has_status,
+      hasstatus => $cyb3rhq::params_agent::service_has_status,
       pattern   => $agent_service_name,
-      provider  => $wazuh::params_agent::ossec_service_provider,
+      provider  => $cyb3rhq::params_agent::ossec_service_provider,
       require   => Package[$agent_package_name],
     }
   }
@@ -628,14 +628,14 @@ class wazuh::agent (
   if ($::osfamily == 'RedHat' and $selinux == true) {
     selinux::module { 'ossec-logrotate':
       ensure    => 'present',
-      source_te => 'puppet:///modules/wazuh/ossec-logrotate.te',
+      source_te => 'puppet:///modules/cyb3rhq/ossec-logrotate.te',
     }
   }
 
   # Manage firewall
   if $manage_firewall {
     include firewall
-    firewall { '1514 wazuh-agent':
+    firewall { '1514 cyb3rhq-agent':
       dport  => $ossec_port,
       proto  => $ossec_protocol,
       action => 'accept',
@@ -647,13 +647,13 @@ class wazuh::agent (
     }
   }
 
-  if ( $wazuh_enrollment_auth_pass ) {
-    file { $wazuh::params_agent::authd_pass_file:
+  if ( $cyb3rhq_enrollment_auth_pass ) {
+    file { $cyb3rhq::params_agent::authd_pass_file:
       owner   => 'root',
-      group   => 'wazuh',
+      group   => 'cyb3rhq',
       mode    => '0640',
-      content => $wazuh_enrollment_auth_pass,
-      require => Package[$wazuh::params_agent::agent_package_name],
+      content => $cyb3rhq_enrollment_auth_pass,
+      require => Package[$cyb3rhq::params_agent::agent_package_name],
     }
   }
 

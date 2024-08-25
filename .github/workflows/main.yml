@@ -1,4 +1,4 @@
-name: Kitchen tests for Wazuh Puppet
+name: Kitchen tests for Cyb3rhq Puppet
 
 on: [pull_request, workflow_dispatch, release]
 
@@ -12,8 +12,8 @@ jobs:
     - name: Create enviroment variables
       run: |
         cat VERSION >> $GITHUB_ENV
-        VER=`curl -s https://api.github.com/repos/wazuh/wazuh/releases/latest | grep '\"tag_name\":' | sed -E 's/.*\"([^\"]+)\".*/\1/' | cut -c 2-`
-        WAZUH_VERSION=$VER >> $GITHUB_ENV
+        VER=`curl -s https://api.github.com/repos/cyb3rhq/cyb3rhq/releases/latest | grep '\"tag_name\":' | sed -E 's/.*\"([^\"]+)\".*/\1/' | cut -c 2-`
+        CYB3RHQ_VERSION=$VER >> $GITHUB_ENV
 
     - name: Install Puppet
       uses: ./.github/debian_install
@@ -43,8 +43,8 @@ jobs:
             exit 1
         fi
         }
-        if compare_versions "{{ env.VERSION }}" -gt "{{ env.WAZUH_VERSION }}"; then
-          sed -i 's/packages.wazuh.com/packages-dev.wazuh.com/' manifests/repo.pp
+        if compare_versions "{{ env.VERSION }}" -gt "{{ env.CYB3RHQ_VERSION }}"; then
+          sed -i 's/packages.wazuh.com/packages-dev.cyb3rhq.com/' manifests/repo.pp
           sed -i 's/4.x/pre-release/' manifests/repo.pp
           sed -i "s/'stable'/'unstable'/" manifests/repo.pp
         fi
@@ -55,8 +55,8 @@ jobs:
     - name: Create artifact
       uses: actions/upload-artifact@v2
       with:
-        name: wazuh-module
-        path: ./pkg/wazuh-wazuh-${{ env.VERSION }}.tar.gz
+        name: cyb3rhq-module
+        path: ./pkg/cyb3rhq-cyb3rhq-${{ env.VERSION }}.tar.gz
 #-------------------------------------------------------------------------------
   ubuntu20:
     runs-on: ubuntu-20.04
@@ -67,8 +67,8 @@ jobs:
     - name: Create enviroment variables
       run: |
         cat VERSION >> $GITHUB_ENV
-        VER=`curl -s https://api.github.com/repos/wazuh/wazuh/releases/latest | grep '\"tag_name\":' | sed -E 's/.*\"([^\"]+)\".*/\1/' | cut -c 2-`
-        WAZUH_VERSION=$VER >> $GITHUB_ENV
+        VER=`curl -s https://api.github.com/repos/cyb3rhq/cyb3rhq/releases/latest | grep '\"tag_name\":' | sed -E 's/.*\"([^\"]+)\".*/\1/' | cut -c 2-`
+        CYB3RHQ_VERSION=$VER >> $GITHUB_ENV
 
     - name: Install Puppet
       uses: ./.github/debian_install
@@ -76,16 +76,16 @@ jobs:
     - name: Configure Puppet server
       uses: ./.github/configure
 
-    - name: Retrieve saved Wazuh module
+    - name: Retrieve saved Cyb3rhq module
       uses: actions/download-artifact@v3
       with:
-        name: wazuh-module
+        name: cyb3rhq-module
 
-    - name: Install Wazuh Module
+    - name: Install Cyb3rhq Module
       run: |
-        sudo puppet module install ./wazuh-wazuh-${{ env.VERSION }}.tar.gz
+        sudo puppet module install ./cyb3rhq-cyb3rhq-${{ env.VERSION }}.tar.gz
 
-    - name: Install Wazuh Stack
+    - name: Install Cyb3rhq Stack
       uses: ./.github/install_stack
 
     - name: Test stack
@@ -100,8 +100,8 @@ jobs:
     - name: Create enviroment variables
       run: |
         cat VERSION >> $GITHUB_ENV
-        VER=`curl -s https://api.github.com/repos/wazuh/wazuh/releases/latest | grep '\"tag_name\":' | sed -E 's/.*\"([^\"]+)\".*/\1/' | cut -c 2-`
-        WAZUH_VERSION=$VER >> $GITHUB_ENV
+        VER=`curl -s https://api.github.com/repos/cyb3rhq/cyb3rhq/releases/latest | grep '\"tag_name\":' | sed -E 's/.*\"([^\"]+)\".*/\1/' | cut -c 2-`
+        CYB3RHQ_VERSION=$VER >> $GITHUB_ENV
 
     - name: Install Puppet
       uses: ./.github/debian_install
@@ -109,16 +109,16 @@ jobs:
     - name: Configure Puppet server
       uses: ./.github/configure
 
-    - name: Retrieve saved Wazuh module
+    - name: Retrieve saved Cyb3rhq module
       uses: actions/download-artifact@v3
       with:
-        name: wazuh-module
+        name: cyb3rhq-module
 
-    - name: Install Wazuh Module
+    - name: Install Cyb3rhq Module
       run: |
-        sudo puppet module install ./wazuh-wazuh-${{ env.VERSION }}.tar.gz
+        sudo puppet module install ./cyb3rhq-cyb3rhq-${{ env.VERSION }}.tar.gz
 
-    - name: Install Wazuh Stack
+    - name: Install Cyb3rhq Stack
       uses: ./.github/install_stack
 
     - name: Test stack

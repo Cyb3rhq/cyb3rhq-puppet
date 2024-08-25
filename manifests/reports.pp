@@ -1,6 +1,6 @@
-# Copyright (C) 2015, Wazuh Inc.
+# Copyright (C) 2015, Cyb3rhq Inc.
 #Define for a Reports section
-define wazuh::reports(
+define cyb3rhq::reports(
   Optional[String] $r_group               = undef,
   Optional[String] $r_category            = undef,
   Optional[Integer] $r_rule               = undef,
@@ -13,11 +13,11 @@ define wazuh::reports(
   Optional[Enum['yes', 'no']] $r_showlogs = undef,
 ) {
 
-  require wazuh::params_manager
+  require cyb3rhq::params_manager
 
   concat::fragment { $name:
     target  => 'manager_ossec.conf',
     order   => 70,
-    content => template('wazuh/fragments/_reports.erb')
+    content => template('cyb3rhq/fragments/_reports.erb')
   }
 }

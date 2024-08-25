@@ -1,14 +1,14 @@
-# Wazuh - Filebeat configuration file
+# Cyb3rhq - Filebeat configuration file
 filebeat.modules:
-  - module: wazuh
+  - module: cyb3rhq
     alerts:
       enabled: true
     archives:
       enabled: <%= @filebeat_oss_archives %>
 
 setup.template.json.enabled: true
-setup.template.json.path: "/etc/filebeat/wazuh-template.json"
-setup.template.json.name: "wazuh"
+setup.template.json.path: "/etc/filebeat/cyb3rhq-template.json"
+setup.template.json.name: "cyb3rhq"
 setup.template.overwrite: true
 
 # Send events directly to Indexer

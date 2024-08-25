@@ -1,5 +1,5 @@
 require 'spec_helper'
-describe 'wazuh::manager' do
+describe 'cyb3rhq::manager' do
   on_supported_os.each do |os, facts|
     context "on #{os}" do
       let(:facts) do
@@ -20,7 +20,7 @@ describe 'wazuh::manager' do
         end
 
         it { is_expected.to compile.with_all_deps }
-        it { is_expected.to contain_class('wazuh::manager') }
+        it { is_expected.to contain_class('cyb3rhq::manager') }
       end
     end
   end
