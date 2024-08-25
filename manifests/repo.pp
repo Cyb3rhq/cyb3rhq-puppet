@@ -14,7 +14,7 @@ class cyb3rhq::repo (
       }
       exec { 'import-cyb3rhq-key':
         path =>  [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/' ],
-        command => 'curl -s https://packages.wazuh.com/key/GPG-KEY-CYB3RHQ | gpg --no-default-keyring --keyring /usr/share/keyrings/cyb3rhq.gpg --import',
+        command => 'curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | gpg --no-default-keyring --keyring /usr/share/keyrings/cyb3rhq.gpg --import',
         unless  => 'gpg --no-default-keyring --keyring /usr/share/keyrings/cyb3rhq.gpg --list-keys | grep -q 29111145',
       }
 
