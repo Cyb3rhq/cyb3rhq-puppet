@@ -1,12 +1,12 @@
 {
-  "name": "wazuh-wazuh",
+  "name": "cyb3rhq-cyb3rhq",
   "version": "5.0.0",
-  "author": "WAZUH",
-  "summary": "Install and configure Wazuh-HIDS client and server",
+  "author": "CYB3RHQ",
+  "summary": "Install and configure Cyb3rhq-HIDS client and server",
   "license": "Apache-2.0",
-  "source": "https://github.com/wazuh/wazuh-puppet",
-  "project_page": "https://github.com/wazuh/wazuh-puppet",
-  "issues_url": "https://github.com/wazuh/wazuh-puppet/issues",
+  "source": "https://github.com/cyb3rhq/cyb3rhq-puppet",
+  "project_page": "https://github.com/cyb3rhq/cyb3rhq-puppet",
+  "issues_url": "https://github.com/cyb3rhq/cyb3rhq-puppet/issues",
   "dependencies": [
     {
       "name": "puppetlabs/stdlib",
@@ -120,7 +120,7 @@
     "ossec",
     "hids",
     "4.8",
-    "wazuh"
+    "cyb3rhq"
   ],
   "pdk-version": "1.14.1",
   "template-url": "pdk-default#1.10.0",

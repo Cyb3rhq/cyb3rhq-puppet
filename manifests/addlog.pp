@@ -1,6 +1,6 @@
-# Copyright (C) 2015, Wazuh Inc.
+# Copyright (C) 2015, Cyb3rhq Inc.
 #Define a log-file to add to ossec
-define wazuh::addlog(
+define cyb3rhq::addlog(
   $logfile      = undef,
   $logtype      = 'syslog',
   $logcommand   = undef,
@@ -8,11 +8,11 @@ define wazuh::addlog(
   $frequency    = undef,
   $target_arg   = 'manager_ossec.conf',
 ) {
-  require wazuh::params_manager
+  require cyb3rhq::params_manager
 
   concat::fragment { "ossec.conf_localfile-${logfile}":
     target  => $target_arg,
-    content => template('wazuh/fragments/_localfile_generation.erb'),
+    content => template('cyb3rhq/fragments/_localfile_generation.erb'),
     order   => 21,
   }
 

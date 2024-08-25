@@ -1,15 +1,15 @@
-# Copyright (C) 2015, Wazuh Inc.
-# Setup for Wazuh Dashboard
-class wazuh::dashboard (
-  $dashboard_package = 'wazuh-dashboard',
-  $dashboard_service = 'wazuh-dashboard',
+# Copyright (C) 2015, Cyb3rhq Inc.
+# Setup for Cyb3rhq Dashboard
+class cyb3rhq::dashboard (
+  $dashboard_package = 'cyb3rhq-dashboard',
+  $dashboard_service = 'cyb3rhq-dashboard',
   $dashboard_version = '5.0.0',
   $indexer_server_ip = 'localhost',
   $indexer_server_port = '9200',
   $manager_api_host = '127.0.0.1',
-  $dashboard_path_certs = '/etc/wazuh-dashboard/certs',
-  $dashboard_fileuser = 'wazuh-dashboard',
-  $dashboard_filegroup = 'wazuh-dashboard',
+  $dashboard_path_certs = '/etc/cyb3rhq-dashboard/certs',
+  $dashboard_fileuser = 'cyb3rhq-dashboard',
+  $dashboard_filegroup = 'cyb3rhq-dashboard',
 
   $dashboard_server_port = '443',
   $dashboard_server_host = '0.0.0.0',
@@ -21,13 +21,13 @@ class wazuh::dashboard (
   $dashboard_user = 'kibanaserver',
   $dashboard_password = 'kibanaserver',
 
-  $dashboard_wazuh_api_credentials = [
+  $dashboard_cyb3rhq_api_credentials = [
     {
       'id'       => 'default',
       'url'      => "https://${manager_api_host}",
       'port'     => '55000',
-      'user'     => 'wazuh-wui',
-      'password' => 'wazuh-wui',
+      'user'     => 'cyb3rhq-wui',
+      'password' => 'cyb3rhq-wui',
     },
   ],
 
@@ -44,7 +44,7 @@ class wazuh::dashboard (
   }
 
   # install package
-  package { 'wazuh-dashboard':
+  package { 'cyb3rhq-dashboard':
     ensure => $dashboard_version_install,
     name   => $dashboard_package,
   }
@@ -53,7 +53,7 @@ class wazuh::dashboard (
     path    => '/usr/bin:/bin',
     command => "mkdir -p ${dashboard_path_certs}",
     creates => $dashboard_path_certs,
-    require => Package['wazuh-dashboard'],
+    require => Package['cyb3rhq-dashboard'],
   }
   -> file { $dashboard_path_certs:
     ensure => directory,
@@ -78,39 +78,39 @@ class wazuh::dashboard (
     }
   }
 
-  file { '/etc/wazuh-dashboard/opensearch_dashboards.yml':
-    content => template('wazuh/wazuh_dashboard_yml.erb'),
+  file { '/etc/cyb3rhq-dashboard/opensearch_dashboards.yml':
+    content => template('cyb3rhq/cyb3rhq_dashboard_yml.erb'),
     group   => $dashboard_filegroup,
     mode    => '0640',
     owner   => $dashboard_fileuser,
-    require => Package['wazuh-dashboard'],
-    notify  => Service['wazuh-dashboard'],
+    require => Package['cyb3rhq-dashboard'],
+    notify  => Service['cyb3rhq-dashboard'],
   }
 
-  file { [ '/usr/share/wazuh-dashboard/data/wazuh/', '/usr/share/wazuh-dashboard/data/wazuh/config' ]:
+  file { [ '/usr/share/cyb3rhq-dashboard/data/cyb3rhq/', '/usr/share/cyb3rhq-dashboard/data/cyb3rhq/config' ]:
     ensure  => 'directory',
     group   => $dashboard_filegroup,
     mode    => '0755',
     owner   => $dashboard_fileuser,
-    require => Package['wazuh-dashboard'],
+    require => Package['cyb3rhq-dashboard'],
   }
-  -> file { '/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml':
-    content => template('wazuh/wazuh_yml.erb'),
+  -> file { '/usr/share/cyb3rhq-dashboard/data/cyb3rhq/config/cyb3rhq.yml':
+    content => template('cyb3rhq/cyb3rhq_yml.erb'),
     group   => $dashboard_filegroup,
     mode    => '0600',
     owner   => $dashboard_fileuser,
-    notify  => Service['wazuh-dashboard'],
+    notify  => Service['cyb3rhq-dashboard'],
   }
 
   unless $use_keystore {
-    file { '/etc/wazuh-dashboard/opensearch_dashboards.keystore':
+    file { '/etc/cyb3rhq-dashboard/opensearch_dashboards.keystore':
       ensure  => absent,
-      require => Package['wazuh-dashboard'],
-      before  => Service['wazuh-dashboard'],
+      require => Package['cyb3rhq-dashboard'],
+      before  => Service['cyb3rhq-dashboard'],
     }
   }
 
-  service { 'wazuh-dashboard':
+  service { 'cyb3rhq-dashboard':
     ensure     => running,
     enable     => true,
     hasrestart => true,

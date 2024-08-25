@@ -1,0 +1,51 @@
+#
+# Cyb3rhq API configuration file
+# Copyright (C) 2015, Cyb3rhq Inc.
+#
+host: <%= @cyb3rhq_api_host %>
+port: <%= @cyb3rhq_api_port %>
+# Advanced configuration
+https:
+  enabled: <%= @cyb3rhq_api_https_enabled %>
+  key: <%= @cyb3rhq_api_https_key %>
+  cert: <%= @cyb3rhq_api_https_cert %>
+  use_ca: <%= @cyb3rhq_api_https_use_ca %>
+  ca: <%= @cyb3rhq_api_https_ca %>
+  ssl_protocol: <%= @cyb3rhq_api_ssl_protocol %>
+  ssl_ciphers: <%= @cyb3rhq_api_ssl_ciphers %>
+# Logging configuration
+# Values for API log level: disabled, info, warning, error, debug, debug2 (each level includes the previous level).
+logs:
+  level: <%= @cyb3rhq_api_logs_level %>
+# Cross-origin resource sharing: https://github.com/aio-libs/aiohttp-cors#usage
+cors:
+  enabled: <%= @cyb3rhq_api_cors_enabled %>
+  source_route: <%= @cyb3rhq_api_cors_source_route %>
+  expose_headers: <%= @cyb3rhq_api_cors_expose_headers %>
+  allow_headers: <%= @cyb3rhq_api_cors_allow_headers %>
+  allow_credentials: <%= @cyb3rhq_api_cors_allow_credentials %>
+# Cache (time in seconds)
+cache:
+  enabled: <%= @cyb3rhq_api_cache_enabled %>
+  time: <%= @cyb3rhq_api_cache_time %>
+# Access parameters
+access:
+  max_login_attempts: <%= @cyb3rhq_api_access_max_login_attempts %>
+  block_time: <%= @cyb3rhq_api_access_block_time %>
+  max_request_per_minute: <%= @cyb3rhq_api_access_max_request_per_minute %>
+# Drop privileges (Run as ossec user)
+drop_privileges: <%= @cyb3rhq_api_drop_privileges %>
+# Enable features under development
+experimental_features: <%= @cyb3rhq_api_experimental_features %>
+# Enable remote commands
+upload_configuration:
+  remote_commands:
+    localfile:
+      allow: <%= @remote_commands_localfile %>
+      exceptions: <%= @remote_commands_localfile_exceptions %>
+    wodle_command:
+      allow: <%= @remote_commands_wodle %>
+      exceptions: []
+  limits:
+    eps:
+      allow: <%= @limits_eps %>

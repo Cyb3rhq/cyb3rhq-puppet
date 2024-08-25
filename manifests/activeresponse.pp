@@ -1,6 +1,6 @@
-# Copyright (C) 2015, Wazuh Inc.
+# Copyright (C) 2015, Cyb3rhq Inc.
 #Define for a specific ossec active-response
-define wazuh::activeresponse(
+define cyb3rhq::activeresponse(
   $active_response_name               = 'Rendering active-response template',
   $active_response_disabled           = undef,
   $active_response_linux_ca_store     = undef,
@@ -15,7 +15,7 @@ define wazuh::activeresponse(
   $target_arg                         = 'manager_ossec.conf',
   $order_arg                          = 80,
   $before_arg                         = undef,
-  $content_arg                        = 'wazuh/fragments/_activeresponse.erb'
+  $content_arg                        = 'cyb3rhq/fragments/_activeresponse.erb'
 ) {
   concat::fragment { $active_response_name:
     target  => $target_arg,

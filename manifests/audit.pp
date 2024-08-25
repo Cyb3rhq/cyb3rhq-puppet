@@ -1,6 +1,6 @@
-# Copyright (C) 2015, Wazuh Inc.
+# Copyright (C) 2015, Cyb3rhq Inc.
 # Define an ossec command
-class wazuh::audit (
+class cyb3rhq::audit (
   $audit_manage_rules = false,
   $audit_buffer_bytes = '8192',
   $audit_backlog_wait_time = '0',

@@ -1,22 +1,22 @@
-# Copyright (C) 2015, Wazuh Inc.
-# Setup for Wazuh Indexer
-class wazuh::indexer (
+# Copyright (C) 2015, Cyb3rhq Inc.
+# Setup for Cyb3rhq Indexer
+class cyb3rhq::indexer (
   # opensearch.yml configuration
   $indexer_network_host = '0.0.0.0',
-  $indexer_cluster_name = 'wazuh-cluster',
+  $indexer_cluster_name = 'cyb3rhq-cluster',
   $indexer_node_name = 'node-1',
   $indexer_node_max_local_storage_nodes = '1',
-  $indexer_service = 'wazuh-indexer',
-  $indexer_package = 'wazuh-indexer',
+  $indexer_service = 'cyb3rhq-indexer',
+  $indexer_package = 'cyb3rhq-indexer',
   $indexer_version = '5.0.0-1',
-  $indexer_fileuser = 'wazuh-indexer',
-  $indexer_filegroup = 'wazuh-indexer',
+  $indexer_fileuser = 'cyb3rhq-indexer',
+  $indexer_filegroup = 'cyb3rhq-indexer',
 
-  $indexer_path_data = '/var/lib/wazuh-indexer',
-  $indexer_path_logs = '/var/log/wazuh-indexer',
-  $indexer_path_certs = '/etc/wazuh-indexer/certs',
+  $indexer_path_data = '/var/lib/cyb3rhq-indexer',
+  $indexer_path_logs = '/var/log/cyb3rhq-indexer',
+  $indexer_path_certs = '/etc/cyb3rhq-indexer/certs',
   $indexer_security_init_lockfile = '/var/tmp/indexer-security-init.lock',
-  $full_indexer_reinstall = false, # Change to true when whant a full reinstall of Wazuh indexer
+  $full_indexer_reinstall = false, # Change to true when whant a full reinstall of Cyb3rhq indexer
 
   $indexer_ip = 'localhost',
   $indexer_port = '9200',
@@ -29,7 +29,7 @@ class wazuh::indexer (
 ) {
 
   # install package
-  package { 'wazuh-indexer':
+  package { 'cyb3rhq-indexer':
     ensure => $indexer_version,
     name   => $indexer_package,
   }
@@ -38,7 +38,7 @@ class wazuh::indexer (
     path    => '/usr/bin:/bin',
     command => "mkdir -p ${indexer_path_certs}",
     creates => $indexer_path_certs,
-    require => Package['wazuh-indexer'],
+    require => Package['cyb3rhq-indexer'],
   }
   -> file { $indexer_path_certs:
     ensure => directory,
@@ -68,71 +68,71 @@ class wazuh::indexer (
 
 
   file { 'configuration file':
-    path    => '/etc/wazuh-indexer/opensearch.yml',
-    content => template('wazuh/wazuh_indexer_yml.erb'),
+    path    => '/etc/cyb3rhq-indexer/opensearch.yml',
+    content => template('cyb3rhq/cyb3rhq_indexer_yml.erb'),
     group   => $indexer_filegroup,
     mode    => '0660',
     owner   => $indexer_fileuser,
-    require => Package['wazuh-indexer'],
-    notify  => Service['wazuh-indexer'],
+    require => Package['cyb3rhq-indexer'],
+    notify  => Service['cyb3rhq-indexer'],
   }
 
   file_line { 'Insert line initial size of total heap space':
-    path    => '/etc/wazuh-indexer/jvm.options',
+    path    => '/etc/cyb3rhq-indexer/jvm.options',
     line    => "-Xms${jvm_options_memory}",
     match   => '^-Xms',
-    require => Package['wazuh-indexer'],
-    notify  => Service['wazuh-indexer'],
+    require => Package['cyb3rhq-indexer'],
+    notify  => Service['cyb3rhq-indexer'],
   }
 
   file_line { 'Insert line maximum size of total heap space':
-    path    => '/etc/wazuh-indexer/jvm.options',
+    path    => '/etc/cyb3rhq-indexer/jvm.options',
     line    => "-Xmx${jvm_options_memory}",
     match   => '^-Xmx',
-    require => Package['wazuh-indexer'],
-    notify  => Service['wazuh-indexer'],
+    require => Package['cyb3rhq-indexer'],
+    notify  => Service['cyb3rhq-indexer'],
   }
 
-  service { 'wazuh-indexer':
+  service { 'cyb3rhq-indexer':
     ensure  => running,
     enable  => true,
     name    => $indexer_service,
-    require => Package['wazuh-indexer'],
+    require => Package['cyb3rhq-indexer'],
   }
 
   file_line { "Insert line limits nofile for ${indexer_fileuser}":
     path   => '/etc/security/limits.conf',
     line   => "${indexer_fileuser} - nofile  65535",
     match  => "^${indexer_fileuser} - nofile\s",
-    notify => Service['wazuh-indexer'],
+    notify => Service['cyb3rhq-indexer'],
   }
   file_line { "Insert line limits memlock for ${indexer_fileuser}":
     path   => '/etc/security/limits.conf',
     line   => "${indexer_fileuser} - memlock unlimited",
     match  => "^${indexer_fileuser} - memlock\s",
-    notify => Service['wazuh-indexer'],
+    notify => Service['cyb3rhq-indexer'],
   }
 
   # TODO: this should be done by the package itself and not by puppet at all
   [
-    '/etc/wazuh-indexer',
-    '/usr/share/wazuh-indexer',
-    '/var/lib/wazuh-indexer',
+    '/etc/cyb3rhq-indexer',
+    '/usr/share/cyb3rhq-indexer',
+    '/var/lib/cyb3rhq-indexer',
   ].each |String $file| {
     exec { "set recusive ownership of ${file}":
       path        => '/usr/bin:/bin',
       command     => "chown ${indexer_fileuser}:${indexer_filegroup} -R ${file}",
       refreshonly => true,  # only run when package is installed or updated
-      subscribe   => Package['wazuh-indexer'],
-      notify      => Service['wazuh-indexer'],
+      subscribe   => Package['cyb3rhq-indexer'],
+      notify      => Service['cyb3rhq-indexer'],
     }
   }
 
   if $full_indexer_reinstall {
     file { $indexer_security_init_lockfile:
       ensure  => absent,
-      require => Package['wazuh-indexer'],
-      before  => Exec['Initialize the Opensearch security index in Wazuh indexer'],
+      require => Package['cyb3rhq-indexer'],
+      before  => Exec['Initialize the Opensearch security index in Cyb3rhq indexer'],
     }
   }
 }
