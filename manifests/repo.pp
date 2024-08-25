@@ -70,10 +70,10 @@ class cyb3rhq::repo (
 
             if ( $::operatingsystemrelease =~ /^5.*/ ) {
               $baseurl  = 'https://packages.wazuh.com/4.x/yum/5/'
-              $gpgkey   = 'http://packages.wazuh.com/key/GPG-KEY-WAZUH'
+              $gpgkey   = 'http://packages.wazuh.com/key/GPG-KEY-CYB3RHQ'
             } else {
               $baseurl  = 'https://packages.wazuh.com/4.x/yum/'
-              $gpgkey   = 'https://packages.wazuh.com/key/GPG-KEY-WAZUH'
+              $gpgkey   = 'https://packages.wazuh.com/key/GPG-KEY-CYB3RHQ'
             }
           }
           default: { fail('This ossec module has not been tested on your distribution.') }
