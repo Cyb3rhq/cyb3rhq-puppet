@@ -14,7 +14,7 @@ class cyb3rhq::repo (
       }
       exec { 'import-cyb3rhq-key':
         path =>  [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/' ],
-        command => 'curl -s https://packages.wazuh.com/key/GPG-KEY-CYB3RHQ | gpg --no-default-keyring --keyring /usr/share/keyrings/cyb3rhq.gpg --import',
+        command => 'curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | gpg --no-default-keyring --keyring /usr/share/keyrings/cyb3rhq.gpg --import',
         unless  => 'gpg --no-default-keyring --keyring /usr/share/keyrings/cyb3rhq.gpg --list-keys | grep -q 29111145',
       }
 
@@ -70,10 +70,10 @@ class cyb3rhq::repo (
 
             if ( $::operatingsystemrelease =~ /^5.*/ ) {
               $baseurl  = 'https://packages.wazuh.com/4.x/yum/5/'
-              $gpgkey   = 'http://packages.wazuh.com/key/GPG-KEY-CYB3RHQ'
+              $gpgkey   = 'http://packages.wazuh.com/key/GPG-KEY-WAZUH'
             } else {
               $baseurl  = 'https://packages.wazuh.com/4.x/yum/'
-              $gpgkey   = 'https://packages.wazuh.com/key/GPG-KEY-CYB3RHQ'
+              $gpgkey   = 'https://packages.wazuh.com/key/GPG-KEY-WAZUH'
             }
           }
           default: { fail('This ossec module has not been tested on your distribution.') }
